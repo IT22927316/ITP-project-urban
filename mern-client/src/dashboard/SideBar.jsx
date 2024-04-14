@@ -40,6 +40,12 @@ export const SideBar = () => {
           <Sidebar.Item href="/admin/dashboard/manage-event" icon={HiInbox}>
             Manage Events
           </Sidebar.Item>
+          <Sidebar.Item href="/admin/dashboard/manage-inventoryitems" icon={HiShoppingBag}>
+            Manage Products
+          </Sidebar.Item>
+          <Sidebar.Item href="/admin/dashboard/upload-inventoryitem" icon={HiOutlineCloudUpload}>
+            Upload Item
+          </Sidebar.Item>
           <Sidebar.Item href="/admin/dashboard/manage-reviews" icon={HiInbox}>
             Customer Reviews
           </Sidebar.Item>
@@ -48,9 +54,6 @@ export const SideBar = () => {
           </Sidebar.Item>
           <Sidebar.Item href="#" icon={HiUser}>
             Users
-          </Sidebar.Item>
-          <Sidebar.Item href="#" icon={HiShoppingBag}>
-            Products
           </Sidebar.Item>
           <Sidebar.Item href="/login" icon={HiArrowSmRight}>
             Sign In

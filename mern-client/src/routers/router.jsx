@@ -1,7 +1,7 @@
 import {
     createBrowserRouter,
     RouterProvider,
-  } from "react-router-dom";
+} from "react-router-dom";
 import App from "../App";
 import Home from "../home/Home";
 import Articleshub from "../articleshub/Articleshub";
@@ -52,214 +52,235 @@ import UploadContactForm from "../contactus/UploadContactForm";
 import ManageContactUs from "../dashboard/ManageContactUs";
 import SingleContactForm from "../dashboard/SingleContactForm";
 import EditStudentProject from "../dashboard/EditStudentProject";
+import ManageInventoryItems from "../dashboard/ManageInventoryItems";
+import UploadInventoryItem from "../dashboard/UploadInventoryItem";
+import EditInventoryItems from "../dashboard/EditInventoryItems";
+import { CartProvider } from '../inventoryshop/CartContext';
 
-  const router = createBrowserRouter([
+const router = createBrowserRouter([
     {
-      path: "/",
-      element: <App/>,
-      children:[
-        {
-            path: '/',
-            element: <Home/>
-        },
-        {
-            path: "/articleshub",
-            element: <Articleshub/>
-        },
-        
-        {
-            path: "/studentprojects",
-            element: <StudentProjects/>
-        },
-        {
-            path: "/events",
-            element: <Eventshub/>
-        },
-        {
-            path: "/reviewpage",
-            element: <ReviewPage/>
-        },
-        {
-            path: "/communitymain",
-            element: <CommunityMain/>
-        },
-        {
-            path: "/deliverydrivers",
-            element: <MainDriverPage/>
-        },
-        {
-            path: "/alldrivers",
-            element: <AllDrivers/>
-        },
-        {
-            path: "/shop",
-            element: <ShopPage/>
-        },
-        {
-            path: "/userprofile",
-            element: <UserProfile />,
-        },
-        {
-            path: "/uploadproject",
-            element: <AddStudentProject/>
-        },
-        {
-            path: "/qnasection",
-            element: <QnAsection/>
-        },
-        {
-            path: "/uploadreview",
-            element: <UploadReview/>
-        },
-        {
-            path: "/uploadcontactform",
-            element: <UploadContactForm/>
-        },
-        {
-            path: "/uploadquestion",
-            element: <UploadQuestion/>
-        },
-        {
-            path: "/mycart",
-            element: <MyCart/>
-        },
-        {
-            path: "/article/:id",
-            element: <SingleArticle/>,
-            loader: ({params}) => fetch(`http://localhost:5000/article/${params.id}`)
-        },
-        {
-            path: "/studentproject/:id",
-            element: <SingleProject/>,
-            loader: ({params}) => fetch(`http://localhost:5000/studentproject/${params.id}`)
-        },
-        {
-            path: "/event/:id",
-            element: <SingleEvent/>,
-            loader: ({params}) => fetch(`http://localhost:5000/event/${params.id}`)
-        },
-        {
-            path: "/communityform/:id",
-            element: <SingleCommunity/>,
-            loader: ({params}) => fetch(`http://localhost:5000/communityform/${params.id}`)
-        },
-        {
-            path: "/inventoryitem/:id",
-            element: <SingleItem/>,
-            loader: ({params}) => fetch(`http://localhost:5000/inventoryitem/${params.id}`)
-        },
-        {
-            path: "/singledriver/:id",
-            element: <SingleDriverProfile/>,
-            loader: ({params}) => fetch(`http://localhost:5000/singledriver/${params.id}`)
-        }
-      ]
-    },
-    {
-        path: "/admin/dashboard",
-        element: <DashboardLayout/>,
+        path: "/",
+        element: (
+            <CartProvider>
+                <App />
+            </CartProvider>
+        ),
         children: [
             {
-                path: "/admin/dashboard",
-                element: <Dashboard/>
+                path: '/',
+                element: <Home />
             },
             {
-                path: "/admin/dashboard/upload-articles",
-                element: <UploadArticle/>
+                path: "/articleshub",
+                element: <Articleshub />
+            },
+
+            {
+                path: "/studentprojects",
+                element: <StudentProjects />
             },
             {
-                path: "/admin/dashboard/manage-articles",
-                element: <ManageArticles/>
+                path: "/events",
+                element: <Eventshub />
             },
             {
-                path: "/admin/dashboard/manage-studentprojects",
-                element: <ManageStudentProjects/>
+                path: "/reviewpage",
+                element: <ReviewPage />
             },
             {
-                path: "/admin/dashboard/edit-articles/:id",
-                element: <EditArticles/>,
-                loader: ({params}) => fetch(`http://localhost:5000/article/${params.id}`)
+                path: "/communitymain",
+                element: <CommunityMain />
             },
             {
-                path: "/admin/dashboard/edit-answers/:id",
-                element: <EditAnswers/>,
-                loader: ({params}) => fetch(`http://localhost:5000/answer/${params.id}`)
+                path: "/deliverydrivers",
+                element: <MainDriverPage />
             },
             {
-                path: "/admin/dashboard/edit-studentproject/:id",
-                element: <EditStudentProject/>,
-                loader: ({params}) => fetch(`http://localhost:5000/studentproject/${params.id}`)
+                path: "/alldrivers",
+                element: <AllDrivers />
             },
             {
-                path: "/admin/dashboard/upload-events",
-                element: <UploadEvent/>
+                path: "/shop",
+                element: <ShopPage />
             },
             {
-                path:"/admin/dashboard/manage-event",
-                element: <ManageEvent/>
+                path: "/userprofile",
+                element: <UserProfile />,
             },
             {
-                path: "/admin/dashboard/manage-contactusforms",
-                element: <ManageContactUs/>
+                path: "/uploadproject",
+                element: <AddStudentProject />
             },
             {
-                path: "/admin/dashboard/singlecontactusform/:id",
-                element: <SingleContactForm/>,
-                loader: ({params}) => fetch(`http://localhost:5000/contactusform/${params.id}`)
+                path: "/qnasection",
+                element: <QnAsection />
             },
             {
-                path: "/admin/dashboard/manage-question",
-                element: <ManageQnA/>
+                path: "/uploadreview",
+                element: <UploadReview />
             },
             {
-                path: "/admin/dashboard/answer-question/:id",
-                element: <ProvideAnswer/>,
-                loader: ({params}) => fetch(`http://localhost:5000/question/${params.id}`)
+                path: "/uploadcontactform",
+                element: <UploadContactForm />
             },
             {
-                path: "/admin/dashboard/edit-events/:id",
-                element: <EditEvent/>,
-                loader: ({params}) => fetch(`http://localhost:5000/event/${params.id}`)
+                path: "/uploadquestion",
+                element: <UploadQuestion />
             },
             {
-                path: "/admin/dashboard/manage-reviews",
-                element: <ManageReviews/>
+                path: "/mycart",
+                element: <MyCart />
             },
             {
-                path: "/admin/dashboard/manage-users",
-                element: <ManageUsers/>
+                path: "/article/:id",
+                element: <SingleArticle />,
+                loader: ({ params }) => fetch(`http://localhost:5000/article/${params.id}`)
             },
             {
-                path: "/admin/dashboard/manage-deliverydrivers",
-                element: <ManageDrivers/>
+                path: "/studentproject/:id",
+                element: <SingleProject />,
+                loader: ({ params }) => fetch(`http://localhost:5000/studentproject/${params.id}`)
             },
             {
-                path: "/admin/dashboard/upload-driver",
-                element: <UploadDriver/>
+                path: "/event/:id",
+                element: <SingleEvent />,
+                loader: ({ params }) => fetch(`http://localhost:5000/event/${params.id}`)
             },
             {
-                path: "/admin/dashboard/edit-driverdetails/:id",
-                element: <EditDriverDetails/>,
-                loader: ({params}) => fetch(`http://localhost:5000/driverdetail/${params.id}`)
+                path: "/communityform/:id",
+                element: <SingleCommunity />,
+                loader: ({ params }) => fetch(`http://localhost:5000/communityform/${params.id}`)
+            },
+            {
+                path: "/inventoryitem/:id",
+                element: <SingleItem />,
+                loader: ({ params }) => fetch(`http://localhost:5000/inventoryitem/${params.id}`)
+            },
+            {
+                path: "/singledriver/:id",
+                element: <SingleDriverProfile />,
+                loader: ({ params }) => fetch(`http://localhost:5000/singledriver/${params.id}`)
             }
         ]
     },
     {
-        path: "/startup",
-        element: <StartupPage/>
+        path: "/admin/dashboard",
+        element: <DashboardLayout />,
+        children: [
+            {
+                path: "/admin/dashboard",
+                element: <Dashboard />
+            },
+            {
+                path: "/admin/dashboard/upload-articles",
+                element: <UploadArticle />
+            },
+            {
+                path: "/admin/dashboard/manage-articles",
+                element: <ManageArticles />
+            },
+            {
+                path: "/admin/dashboard/manage-studentprojects",
+                element: <ManageStudentProjects />
+            },
+            {
+                path: "/admin/dashboard/edit-articles/:id",
+                element: <EditArticles />,
+                loader: ({ params }) => fetch(`http://localhost:5000/article/${params.id}`)
+            },
+            {
+                path: "/admin/dashboard/edit-answers/:id",
+                element: <EditAnswers />,
+                loader: ({ params }) => fetch(`http://localhost:5000/answer/${params.id}`)
+            },
+            {
+                path: "/admin/dashboard/edit-studentproject/:id",
+                element: <EditStudentProject />,
+                loader: ({ params }) => fetch(`http://localhost:5000/studentproject/${params.id}`)
+            },
+            {
+                path: "/admin/dashboard/upload-events",
+                element: <UploadEvent />
+            },
+            {
+                path: "/admin/dashboard/manage-event",
+                element: <ManageEvent />
+            },
+            {
+                path: "/admin/dashboard/manage-contactusforms",
+                element: <ManageContactUs />
+            },
+            {
+                path: "/admin/dashboard/singlecontactusform/:id",
+                element: <SingleContactForm />,
+                loader: ({ params }) => fetch(`http://localhost:5000/contactusform/${params.id}`)
+            },
+            {
+                path: "/admin/dashboard/manage-question",
+                element: <ManageQnA />
+            },
+            {
+                path: "/admin/dashboard/answer-question/:id",
+                element: <ProvideAnswer />,
+                loader: ({ params }) => fetch(`http://localhost:5000/question/${params.id}`)
+            },
+            {
+                path: "/admin/dashboard/edit-events/:id",
+                element: <EditEvent />,
+                loader: ({ params }) => fetch(`http://localhost:5000/event/${params.id}`)
+            },
+            {
+                path: "/admin/dashboard/manage-reviews",
+                element: <ManageReviews />
+            },
+            {
+                path: "/admin/dashboard/manage-users",
+                element: <ManageUsers />
+            },
+            {
+                path: "/admin/dashboard/manage-deliverydrivers",
+                element: <ManageDrivers />
+            },
+            {
+                path: "/admin/dashboard/upload-driver",
+                element: <UploadDriver />
+            },
+            {
+                path: "/admin/dashboard/edit-driverdetails/:id",
+                element: <EditDriverDetails />,
+                loader: ({ params }) => fetch(`http://localhost:5000/driverdetail/${params.id}`)
+            },
+            {
+                path: "/admin/dashboard/manage-inventoryitems",
+                element: <ManageInventoryItems />,
+            },
+            {
+                path: "/admin/dashboard/upload-inventoryitem",
+                element: <UploadInventoryItem />,
+            },
+            {
+                path: "/admin/dashboard/edit-inventoryitems/:id",
+                element: <EditInventoryItems />,
+                loader: ({ params }) => fetch(`http://localhost:5000/inventoryitem/${params.id}`),
+            },
+        ]
     },
     {
-        path: "startup/sign-up", 
-        element: <Signup/>
+        path: "/startup",
+        element: <StartupPage />
+    },
+    {
+        path: "startup/sign-up",
+        element: <Signup />
     },
     {
         path: "startup/login",
-        element: <Login/>
+        element: <Login />
     },
     {
         path: "/logout",
-        element: <Logout/>
+        element: <Logout />
     }
-  ]);
+]);
 
-  export default router;
+export default router;
