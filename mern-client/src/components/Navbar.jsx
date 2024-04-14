@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { FaUser, FaXmark } from "react-icons/fa6"; // Make sure to import the icons you are using
 import navpic from "../assets/navbarimage1.jpeg";
 import navpic2 from "../assets/navpic.webp";
+import { PiShoppingCart } from "react-icons/pi";
 //style={{ backgroundImage: `url(${navpic})` }} 
 
 
@@ -39,6 +40,7 @@ const Navbar = () => {
         { link: "Community", path: "/communitymain" },
         { link: "Shop", path: "/shop" },
         { link: "Dashboard", path: "/admin/dashboard" },
+        { link: <PiShoppingCart style={{ fontSize: "27px" }} />, path: "/mycart" },
     ]
 
     return (

@@ -283,7 +283,7 @@ const Dashboard = () => {
             <p className="font-normal text-gray-700 dark:text-gray-400 mb-4">
               Upload Your Inventory Item Details Here!
             </p>
-            <Link to="/admin/dashboard/upload-articles">
+            <Link to="/admin/dashboard/upload-inventoryitem">
               <button className='bg-blue-700 px-6 py-2 text-white font-medium hover:bg-black transition-all ease-in duration-200 rounded'>
                 Upload
               </button>
@@ -308,7 +308,7 @@ const Dashboard = () => {
             <p className="font-normal text-gray-700 dark:text-gray-400 mb-4">
               Manage Your Inventory Item Details Here!
             </p>
-            <Link to="/admin/dashboard/manage-articles">
+            <Link to="/admin/dashboard/manage-inventoryitems">
               <button className='bg-blue-700 px-6 py-2 text-white font-medium hover:bg-black transition-all ease-in duration-200 rounded'>
                 Manage
               </button>

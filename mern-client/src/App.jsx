@@ -5,20 +5,21 @@ import './App.css'
 import { Outlet } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import MyFooter from './components/MyFooter'
+import { CartProvider } from './inventoryshop/CartContext';
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
-    <>
-     <div>
-        <Navbar/>
-        <div className='min-h-screen'> 
-          <Outlet/>
+    <CartProvider>
+      <div>
+        <Navbar />
+        <div className='min-h-screen'>
+          <Outlet />
         </div>
-        <MyFooter/>
-     </div>
-    </>
+        <MyFooter />
+      </div>
+    </CartProvider>
   )
 }
 
