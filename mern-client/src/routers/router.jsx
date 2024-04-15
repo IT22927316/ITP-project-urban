@@ -23,6 +23,10 @@ import ManageReviews from "../dashboard/ManageReviews";
 import ShopPage from "../inventoryshop/ShopPage";
 import CommunityMain from "../communityhub/CommunityMain";
 import SingleCommunity from "../communityhub/SingleCommunity";
+import CommunityPage from "../communityhub/CommunityPage";
+import ManageCommunity from "../dashboard/ManageCommunity";
+import UploadCommunity from "../dashboard/UploadCommunity";
+import EditCommunities from "../dashboard/EditCommunities";
 import SingleItem from "../inventoryshop/SingleItem";
 import MyCart from "../inventoryshop/MyCart";
 import ManageEvent from "../dashboard/ManageEvent";
@@ -90,6 +94,10 @@ const router = createBrowserRouter([
             {
                 path: "/communitymain",
                 element: <CommunityMain />
+            },
+            {
+            path: "/communitypage",
+            element: <CommunityPage/>
             },
             {
                 path: "/deliverydrivers",
@@ -249,6 +257,19 @@ const router = createBrowserRouter([
                 path: "/admin/dashboard/edit-driverdetails/:id",
                 element: <EditDriverDetails />,
                 loader: ({ params }) => fetch(`http://localhost:5000/driverdetail/${params.id}`)
+            },
+            {
+                path: "/admin/dashboard/upload-community",
+                element: <UploadCommunity/>
+            },
+            {
+                path: "/admin/dashboard/manage-community",
+                element: <ManageCommunity/>
+            },
+            {
+                path: "/admin/dashboard/edit-communities/:id",
+                element: <EditCommunities/>,
+                loader: ({params}) => fetch(`http://localhost:5000/communityform/${params.id}`)
             },
             {
                 path: "/admin/dashboard/manage-inventoryitems",
