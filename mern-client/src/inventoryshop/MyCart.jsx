@@ -52,7 +52,7 @@ const MyCart = () => {
                 </div>
               </td>
               <td className="py-4 text-center">{item.item_name}</td>
-              <td className="py-4 text-center">Rs.{parseFloat(item.price).toFixed(2)}</td>
+              <td className="py-4 text-center">LKR {parseFloat(item.price).toFixed(2)}</td>
               <td className="py-4 text-center">
                 <input
                   type="number"
@@ -62,7 +62,7 @@ const MyCart = () => {
                   className="w-16 px-2 py-1 border border-gray-300 rounded text-center"
                 />
               </td>
-              <td className="py-4 text-center">Rs.{(item.price * item.quantity).toFixed(2)}</td>
+              <td className="py-4 text-center">LKR {(item.price * item.quantity).toFixed(2)}</td>
               <td className="py-4 text-center">
                 <button className="text-red-600 hover:text-red-700 font-semibold" onClick={() => dispatch({ type: 'REMOVE_FROM_CART', payload: item })}>
                   Remove
@@ -77,7 +77,7 @@ const MyCart = () => {
         <Link to="/shop" className="bg-green-700 text-white font-semibold py-2 px-4 rounded hover:bg-black transition-all duration-300">
           Continue Shopping
         </Link>
-        <p className="text-lg font-semibold">Total: Rs.{totalPrice.toFixed(2)}</p>
+        <p className="text-lg font-semibold">Total: LKR {totalPrice.toFixed(2)}</p>
       </div>
 
       <div className="flex justify-end mb-4">

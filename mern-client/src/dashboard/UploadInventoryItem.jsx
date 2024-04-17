@@ -39,10 +39,11 @@ const UploadInventoryItem = () => {
         const expireDate = form.expireDate.value;
         const price = form.price.value;
         const imageUrl = form.imageUrl.value;
+        const reorderLevel = form.reorderLevel.value;
 
 
         const itemObj = {
-            item_name, category, unitOfMearsurement, quantity, productDescription, manufactureDate, expireDate, price, imageUrl
+            item_name, category, unitOfMearsurement, quantity, productDescription, manufactureDate, expireDate, price, reorderLevel, imageUrl
         }
 
         console.log(itemObj)
@@ -92,24 +93,9 @@ const UploadInventoryItem = () => {
                     </div>
                 </div>
 
-                {/* Second Row */}
-                <div className='flex gap-8'>
-                    {/*unitOfMearsurement*/}
-                    <div className='lg:w-1/2'>
-                        <div className="mb-2 block">
-                            <Label htmlFor="unitOfMearsurement" value="Unit Of Mearsurement" />
-                        </div>
-                        <TextInput id="unitOfMearsurement" name='unitOfMearsurement' type="text" placeholder="Unit Of Mearsurement" required />
-                    </div>
+                
 
-                    {/*quantity*/}
-                    <div className='lg:w-1/2'>
-                        <div className="mb-2 block">
-                            <Label htmlFor="quantity" value="Quantity" />
-                        </div>
-                        <TextInput id="quantity" name='quantity' type="Number" placeholder="Quantity" required />
-                    </div>
-                </div>
+
 
                 {/* 3rd Row */}
                 <div className='flex gap-8'>
@@ -146,6 +132,33 @@ const UploadInventoryItem = () => {
                         </div>
                         <TextInput id="imageUrl" name='imageUrl' type="text" placeholder="Item Image Url" required />
                     </div>
+                </div>
+                {/* Second Row */}
+                <div className='flex gap-8'>
+                    {/*unitOfMearsurement*/}
+                    <div className='lg:w-1/2'>
+                        <div className="mb-2 block">
+                            <Label htmlFor="unitOfMearsurement" value="Unit Of Mearsurement" />
+                        </div>
+                        <TextInput id="unitOfMearsurement" name='unitOfMearsurement' type="text" placeholder="Unit Of Mearsurement" required />
+                    </div>
+
+                    {/*quantity*/}
+                    <div className='lg:w-1/2'>
+                        <div className="mb-2 block">
+                            <Label htmlFor="quantity" value="Quantity" />
+                        </div>
+                        <TextInput id="quantity" name='quantity' type="Number" placeholder="Quantity" required />
+                    </div>
+
+                    {/* reorderLevel */}
+                    <div className='lg:w-1/2'>
+                        <div className="mb-2 block">
+                            <Label htmlFor="reorderLevel" value="Reorder Level" />
+                        </div>
+                        <TextInput id="reorderLevel" name='reorderLevel' type="number" placeholder="Reorder Level" required />
+                    </div>
+
                 </div>
                 {/* 5rd Row - Product Description */}
                 <div>

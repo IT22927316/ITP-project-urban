@@ -63,9 +63,9 @@ const ShopPage = () => {
                 <img src={inventoryItem.imageUrl} alt="" className='w-full h-60 object-cover object-center hover:opacity-100 hover:scale-105 transition duration-300' />
               </Link>
               {/* Add to Cart button positioned in the top right corner of the image, at the bottom */}
-              <button className='absolute bottom-1 right-1 bg-green-200 text-white font-semibold w-12 h-12 rounded-full shadow-md hover:bg-green-300 hover:shadow-lg transition-all duration-300 flex items-center justify-center' 
+              <button className='absolute bottom-1 right-1 bg-green-500 text-white font-semibold w-12 h-12 rounded-full shadow-md hover:bg-green-400 hover:shadow-lg transition-all duration-300 flex items-center justify-center' 
                 onClick={() => handleAddToCart(inventoryItem)}>
-                <FaCartPlus style={{ fontSize: '1.8rem', color: '#38a169' }} />
+                <FaCartPlus style={{ fontSize: '1.8rem', color: '#f1faf6' }} />
               </button>
             </div>
             
@@ -76,7 +76,7 @@ const ShopPage = () => {
             
               <p className="font-normal text-gray-700 dark:text-gray-400">
                 <p><strong>Category: </strong>{inventoryItem.category}</p>
-                <p><strong>Price: </strong>Rs. {inventoryItem.price}/=</p>
+                <p><strong>Price: </strong>LKR {inventoryItem.price}</p>
               </p>
             </Link>
           </Card>

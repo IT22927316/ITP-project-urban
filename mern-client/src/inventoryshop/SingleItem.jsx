@@ -51,7 +51,7 @@ const SingleItem = () => {
           <p className='mb-10 text-lg md:w-5/6'><strong>Quantity: </strong>{quantity}</p>
           <p className='mb-10 text-lg md:w-5/6'><strong>Manufacturer Date: </strong>{manufactureDate}</p>
           <p className='mb-10 text-lg md:w-5/6'><strong>Expire Date: </strong>{expireDate}</p>
-          <p className='mb-10 text-lg md:w-5/6 '><strong>Price: </strong>Rs. {price}/=</p>
+          <p className='mb-10 text-lg md:w-5/6 '><strong>Price: </strong>LKR {price}</p>
 
           <hr></hr>
 
