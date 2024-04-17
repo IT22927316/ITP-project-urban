@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 const EditInventoryItems = () => {
     const { id } = useParams();
-    const { item_name, category, unitOfMearsurement, quantity, productDescription, manufactureDate, expireDate, price, imageUrl } = useLoaderData();
+    const { item_name, category, unitOfMearsurement, quantity, productDescription, manufactureDate, expireDate, price, imageUrl, reorderLevel } = useLoaderData();
 
     const itemCategories = [
         "Vegetables",
@@ -42,9 +42,11 @@ const EditInventoryItems = () => {
         const expireDate = form.expireDate.value;
         const price = form.price.value;
         const imageUrl = form.imageUrl.value;
+        const reorderLevel = form.reorderLevel.value;
+
 
         const updateItemObj = {
-            item_name, category, unitOfMearsurement, quantity, productDescription, manufactureDate, expireDate, price, imageUrl
+            item_name, category, unitOfMearsurement, quantity, productDescription, manufactureDate, expireDate, price, imageUrl, reorderLevel
         }
 
         //console.log(itemObj)
@@ -90,25 +92,7 @@ const EditInventoryItems = () => {
                         </Select>
 
                     </div>
-                </div>
-
-                {/* Second Row */}
-                <div className='flex gap-8'>
-                    {/*unitOfMearsurement*/}
-                    <div className='lg:w-1/2'>
-                        <div className="mb-2 block">
-                            <Label htmlFor="unitOfMearsurement" value="Unit Of Mearsurement" />
-                        </div>
-                        <TextInput id="unitOfMearsurement" name='unitOfMearsurement' type="text" placeholder="Unit Of Mearsurement" required defaultValue={unitOfMearsurement} />
-                    </div>
-
-                    {/*quantity*/}
-                    <div className='lg:w-1/2'>
-                        <div className="mb-2 block">
-                            <Label htmlFor="quantity" value="Quantity" />
-                        </div>
-                        <TextInput id="quantity" name='quantity' type="Number" placeholder="Quantity" required defaultValue={quantity} />
-                    </div>
+                    
                 </div>
 
                 {/* 3rd Row */}
@@ -147,6 +131,33 @@ const EditInventoryItems = () => {
                         <TextInput id="imageUrl" name='imageUrl' type="text" placeholder="Item Image Url" required defaultValue={imageUrl} />
                     </div>
                 </div>
+
+                {/* Second Row */}
+                <div className='flex gap-8'>
+                    {/*unitOfMearsurement*/}
+                    <div className='lg:w-1/2'>
+                        <div className="mb-2 block">
+                            <Label htmlFor="unitOfMearsurement" value="Unit Of Mearsurement" />
+                        </div>
+                        <TextInput id="unitOfMearsurement" name='unitOfMearsurement' type="text" placeholder="Unit Of Mearsurement" required defaultValue={unitOfMearsurement} />
+                    </div>
+
+                    {/*quantity*/}
+                    <div className='lg:w-1/2'>
+                        <div className="mb-2 block">
+                            <Label htmlFor="quantity" value="Quantity" />
+                        </div>
+                        <TextInput id="quantity" name='quantity' type="Number" placeholder="Quantity" required defaultValue={quantity} />
+                    </div>
+                    {/* reorderLevel */}
+                    <div className='lg:w-1/2'>
+                        <div className="mb-2 block">
+                            <Label htmlFor="reorderLevel" value="Reorder Level" />
+                        </div>
+                        <TextInput id="reorderLevel" name='reorderLevel' type="number" placeholder="Reorder Level" required defaultValue={reorderLevel}/>
+                    </div>
+                </div>
+
                 {/* 5rd Row - Product Description */}
                 <div>
                     <div className="mb-2 block">

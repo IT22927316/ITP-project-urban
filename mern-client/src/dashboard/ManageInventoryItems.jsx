@@ -2,6 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { Table } from 'flowbite-react';
 import { Link } from 'react-router-dom';
 import { FaSearch } from "react-icons/fa";
+import jsPDF from 'jspdf';
+import 'jspdf-autotable';
+import { Button } from 'flowbite-react';
+import userImg1 from "../assets/urbanlogo.jpeg";
 
 const ManageInventoryItems = () => {
   const [allInventoryItems, setAllInventoryItems] = useState([]);
@@ -10,19 +14,93 @@ const ManageInventoryItems = () => {
   useEffect(() => {
     fetch("http://localhost:5000/all-inventoryitems")
       .then(res => res.json())
-      .then(data => setAllInventoryItems(data));
+      .then(data => setAllInventoryItems(data))
+      .catch(error => {
+        console.error('Error fetching data:', error);
+        // Handle error, e.g., display an error message to the user
+      });
   }, []);
 
-  // Delete 1 inventory item
+  const generatePDF = () => {
+    console.log("Generating PDF...");
+    // Create a new PDF instance
+    const doc = new jsPDF();
+
+    // Add logo
+    const img = new Image();
+    img.src = userImg1;
+    img.onload = function () {
+      doc.addImage(this, 'JPEG', 10, 10, 20, 20); // Adjust position and size as needed
+
+      // Add company name
+      doc.setFontSize(16);
+      doc.text('UrbanHarvestHub', 35, 20);
+
+      // Add title
+      doc.setFontSize(20);
+      doc.setTextColor(0, 0, 0); // Set text color (RGB)
+      // Calculate the width of the text
+      const textWidth = doc.getStringUnitWidth('Inventory Items Report') * doc.internal.getFontSize() / doc.internal.scaleFactor;
+      // Calculate the x-position to center the text
+      const centerX = (doc.internal.pageSize.width - textWidth) / 2;
+      // Add title (centered horizontally)
+      doc.text('Inventory Items Report', centerX, 40);
+
+
+      // Add a table to the PDF
+      doc.autoTable({
+        head: [['Number', 'Product Name', 'Category', 'Unit of Measurement', 'Quantity', 'Reorder Level', 'Manufacture Date', 'Expire Date', 'Price']],
+        body: allInventoryItems.map((inventoryItem, index) => [
+          index + 1,
+          inventoryItem.item_name,
+          inventoryItem.category,
+          inventoryItem.unitOfMearsurement,
+          inventoryItem.quantity,
+          inventoryItem.reorderLevel,
+          inventoryItem.manufactureDate,
+          inventoryItem.expireDate,
+          inventoryItem.price
+        ]),
+        startY: 50, // Adjust starting Y position as needed
+        headStyles: {
+          fillColor: [47, 133, 90], // Green color for the head row
+          textColor: [255, 255, 255] // White text color for the head row
+        },
+        alternateRowStyles: {
+          fillColor: [223, 240, 216], // Light green color for alternate rows
+          textColor: [0, 0, 0] // Black text color for alternate rows
+        }
+      });
+
+      // Add signature areas
+      doc.setFontSize(12);
+      doc.text('Inventory Manager : ...................................', 60, doc.autoTable.previous.finalY + 20);
+      doc.text('Admin 1 : ...................................', 60, doc.autoTable.previous.finalY + 40);
+      doc.text('Admin 2 : ...................................', 60, doc.autoTable.previous.finalY + 60);
+
+      // Save the PDF
+      doc.save('inventory-items-report.pdf');
+    };
+  };
+
   const handleDelete = (id) => {
-    console.log(id);
     fetch(`http://localhost:5000/inventoryitem/${id}`, {
       method: "DELETE",
     })
-      .then(res => res.json())
+      .then(res => {
+        if (!res.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return res.json();
+      })
       .then(data => {
-        alert("Inventory Item Delete Successfully!");
-        // setAllInventoryItems(data);
+        alert("Inventory Item Deleted Successfully!");
+        // Update the state after deletion if needed
+        // For example, fetch all inventory items again
+      })
+      .catch(error => {
+        console.error('Error deleting inventory item:', error);
+        // Handle error, e.g., display an error message to the user
       });
   };
 
@@ -32,6 +110,7 @@ const ManageInventoryItems = () => {
     inventoryItem.category.toLowerCase().includes(searchQuery.toLowerCase()) ||
     inventoryItem.unitOfMearsurement.toLowerCase().includes(searchQuery.toLowerCase()) ||
     inventoryItem.quantity.toString().includes(searchQuery.toLowerCase()) ||
+    inventoryItem.reorderLevel.toString().includes(searchQuery.toLowerCase()) ||
     inventoryItem.manufactureDate.toLowerCase().includes(searchQuery.toLowerCase()) ||
     inventoryItem.expireDate.toLowerCase().includes(searchQuery.toLowerCase()) ||
     inventoryItem.price.toString().includes(searchQuery.toLowerCase())
@@ -40,7 +119,7 @@ const ManageInventoryItems = () => {
   return (
     <div className='px-4 my-12'>
       <div className='flex justify-between items-start mb-8'>
-        <h2 className='mb-8 text-3xl font-bold'>Manage Your Inventory Item</h2>
+        <h2 className='text-3xl font-bold'>Manage Your Inventory Items</h2>
 
         {/* Search bar */}
         <div className="relative w-96 mb-4">
@@ -56,7 +135,12 @@ const ManageInventoryItems = () => {
           </div>
         </div>
       </div>
-      
+
+      <div className='flex justify-end items-center space-x-4 px-4 lg:px-1'>
+        <Button onClick={generatePDF} type="submit" className='w-48 h-10 bg-green-700'>Generate Report</Button>
+      </div>
+      <br />
+
       {/* Table */}
       <Table className='lg:w-[1180px] '>
         <Table.Head>
@@ -65,6 +149,7 @@ const ManageInventoryItems = () => {
           <Table.HeadCell>Category</Table.HeadCell>
           <Table.HeadCell>Unit of Measurement</Table.HeadCell>
           <Table.HeadCell>Quantity</Table.HeadCell>
+          <Table.HeadCell>Reorder Level</Table.HeadCell>
           <Table.HeadCell>Manufacture Date</Table.HeadCell>
           <Table.HeadCell>Expire Date</Table.HeadCell>
           <Table.HeadCell>Price</Table.HeadCell>
@@ -78,6 +163,7 @@ const ManageInventoryItems = () => {
               <Table.Cell>{inventoryItem.category}</Table.Cell>
               <Table.Cell>{inventoryItem.unitOfMearsurement}</Table.Cell>
               <Table.Cell>{inventoryItem.quantity}</Table.Cell>
+              <Table.Cell>{inventoryItem.reorderLevel}</Table.Cell>
               <Table.Cell>{inventoryItem.manufactureDate}</Table.Cell>
               <Table.Cell>{inventoryItem.expireDate}</Table.Cell>
               <Table.Cell>{inventoryItem.price}</Table.Cell>

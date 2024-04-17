@@ -1,17 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { FaUser, FaXmark } from "react-icons/fa6"; // Make sure to import the icons you are using
-import navpic from "../assets/navbarimage1.jpeg";
-import navpic2 from "../assets/navpic.webp";
+import { FaUser, FaXmark } from "react-icons/fa6";
 import { PiShoppingCart } from "react-icons/pi";
-//style={{ backgroundImage: `url(${navpic})` }} 
-
+import { useCart } from '../inventoryshop/CartContext';
 
 const Navbar = () => {
+    const { state } = useCart();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isSticky, setIsSticky] = useState(false);
 
-    //toggle menu
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
     }
@@ -28,11 +25,14 @@ const Navbar = () => {
         window.addEventListener("scroll", handleScroll);
 
         return () => {
-            window.removeEventListener("scroll", handleScroll); // Use removeEventListener here
+            window.removeEventListener("scroll", handleScroll);
         }
     }, [])
 
-    //navigation items
+    const cartItemCount = state.items.reduce((total, item) => total + item.quantity, 0);
+
+    const cartIconSize = "w-7 h-7";
+
     const navItems = [
         { link: "Home", path: "/" },
         { link: "KnowledgeHub", path: "/articleshub" },
@@ -40,35 +40,36 @@ const Navbar = () => {
         { link: "Community", path: "/communitymain" },
         { link: "Shop", path: "/shop" },
         { link: "Dashboard", path: "/admin/dashboard" },
-        { link: <PiShoppingCart style={{ fontSize: "27px" }} />, path: "/mycart" },
     ]
 
     return (
         <header className={`w-full fixed top-0 left-0 right-0 transition-all ease-in duration-300 z-50 ${isSticky ? 'bg-teal-300' : ''}`}>
             <nav className='py-4 lg:px-24 px-4 bg-green-700'>
                 <div className='flex justify-between item-center text-base gap-8'>
-                    {/* insert logo */}
                     <Link to="/" className='text-2xl font-bold text-white flex items-center gap-2'>UrbanHarvestHub</Link>
 
-                    {/* nav items for large device */}
                     <ul className='md:flex space-x-12 hidden font-semibold'>
-                        {
-                            navItems.map(({ link, path }) => (
-                                <li key={path}>
-                                    <Link to={path} className='block text-base text-white uppercase cursor-pointer hover:text-blue-700'>{link}</Link>
-                                </li>
-                            ))
-                        }
+                        {navItems.map(({ link, path }) => (
+                            <li key={path}>
+                                <Link to={path} className='block text-base text-white uppercase cursor-pointer hover:text-blue-700'>{link}</Link>
+                            </li>
+                        ))}
                     </ul>
 
-                    {/* button for lg devices */}
                     <div className='space-x-12 hidden lg:flex items-center'>
                         <Link to="/userprofile">
                             <button><FaUser className='w-5 hover:text-blue-700' /></button>
                         </Link>
+                        <Link to="/mycart">
+                            <div className="relative">
+                                <PiShoppingCart className={`text-white hover:text-blue-700 ${cartIconSize}`} />
+                                {cartItemCount > 0 && (
+                                    <div className="absolute -top-2 -right-2 bg-red-500 rounded-full text-white text-xs w-5 h-5 flex items-center justify-center">{cartItemCount}</div>
+                                )}
+                            </div>
+                        </Link>
                     </div>
 
-                    {/* menu btn for the mobile devices */}
                     <div className='md:hidden'>
                         <button onClick={toggleMenu} className='text-black focus:outline-none'>
                             {isMenuOpen ? <FaXmark className='h-5 w-5 text-white' /> : <FaUser className='h-5 w-5 text-white' />}
@@ -76,13 +77,10 @@ const Navbar = () => {
                     </div>
                 </div>
 
-                {/* nav items for sm devices */}
                 <div className={`space-y-4 px-4 mt-16 py-7 bg-blue-700 ${isMenuOpen ? "block fixed top-0 right-0 left-0" : "hidden"}`}>
-                    {
-                        navItems.map(({ link, path }) => (
-                            <Link key={path} to={path} className='block text-base text-white uppercase cursor-pointer'>{link}</Link>
-                        ))
-                    }
+                    {navItems.map(({ link, path }) => (
+                        <Link key={path} to={path} className='block text-base text-white uppercase cursor-pointer'>{link}</Link>
+                    ))}
                 </div>
             </nav>
         </header>
