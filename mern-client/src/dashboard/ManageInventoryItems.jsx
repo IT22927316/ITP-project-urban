@@ -6,10 +6,12 @@ import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 import { Button } from 'flowbite-react';
 import userImg1 from "../assets/urbanlogo.jpeg";
+import { PiCheckCircleBold } from "react-icons/pi";
 
 const ManageInventoryItems = () => {
   const [allInventoryItems, setAllInventoryItems] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
+  const [showDeleteSuccessMessage, setShowDeleteSuccessMessage] = useState(false);
 
   useEffect(() => {
     fetch("http://localhost:5000/all-inventoryitems")
@@ -105,7 +107,10 @@ const ManageInventoryItems = () => {
         return res.json();
       })
       .then(data => {
-        alert("Inventory Item Deleted Successfully!");
+        setShowDeleteSuccessMessage(true);
+        setTimeout(() => {
+          setShowDeleteSuccessMessage(false);
+        }, 5000); // Hide the message after 5 seconds
         // Update the state after deletion if needed
         // For example, fetch all inventory items again
       })
@@ -188,6 +193,13 @@ const ManageInventoryItems = () => {
           </Table.Body>
         ))}
       </Table>
+      {/* Delete Success Message */}
+      {showDeleteSuccessMessage && (
+        <div className="fixed top-4 left-1/2 transform -translate-x-1/2 bg-green-500 text-white py-2 px-4 rounded flex items-center">
+          <PiCheckCircleBold className="h-6 w-6 mr-2" />
+          <span>Inventory Item Deleted Successfully!</span>
+        </div>
+      )}
     </div>
   );
 };
