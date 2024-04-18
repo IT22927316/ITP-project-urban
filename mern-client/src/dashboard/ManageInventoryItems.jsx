@@ -36,16 +36,26 @@ const ManageInventoryItems = () => {
       doc.setFontSize(16);
       doc.text('UrbanHarvestHub', 35, 20);
 
+      // Add current date
+    const currentDate = new Date().toLocaleDateString();
+    doc.setFontSize(12);
+    doc.setTextColor(0, 0, 0);
+    doc.text(`Date: ${currentDate}`, 160, 25); // Adjust position as needed
+
+      // Add line separating logo, company name, and date from title
+      doc.setLineWidth(0.5); // Set line width
+      doc.setDrawColor(0); // Set line color (black)
+      doc.line(10, 30, doc.internal.pageSize.width - 10, 30); // Draw line
+
       // Add title
       doc.setFontSize(20);
-      doc.setTextColor(0, 0, 0); // Set text color (RGB)
+      doc.setTextColor(47, 133, 97); // Set text color (RGB)
       // Calculate the width of the text
       const textWidth = doc.getStringUnitWidth('Inventory Items Report') * doc.internal.getFontSize() / doc.internal.scaleFactor;
       // Calculate the x-position to center the text
       const centerX = (doc.internal.pageSize.width - textWidth) / 2;
       // Add title (centered horizontally)
       doc.text('Inventory Items Report', centerX, 40);
-
 
       // Add a table to the PDF
       doc.autoTable({
@@ -74,9 +84,10 @@ const ManageInventoryItems = () => {
 
       // Add signature areas
       doc.setFontSize(12);
-      doc.text('Inventory Manager : ...................................', 60, doc.autoTable.previous.finalY + 20);
-      doc.text('Admin 1 : ...................................', 60, doc.autoTable.previous.finalY + 40);
-      doc.text('Admin 2 : ...................................', 60, doc.autoTable.previous.finalY + 60);
+      doc.setTextColor(0, 0, 0);
+      doc.text('Signature Of the Inventory Manager : ...................................', 60, doc.autoTable.previous.finalY + 20);
+      doc.text('Signature Of the Admin 1 : ...................................', 60, doc.autoTable.previous.finalY + 40);
+      doc.text('Signature Of the Admin 2 : ...................................', 60, doc.autoTable.previous.finalY + 60);
 
       // Save the PDF
       doc.save('inventory-items-report.pdf');
