@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Button, Checkbox, Label, Select, TextInput, Textarea } from 'flowbite-react';
 import { useLoaderData, useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import { PiCheckCircleBold } from "react-icons/pi";
 
 const EditInventoryItems = () => {
     const { id } = useParams();
@@ -22,6 +23,7 @@ const EditInventoryItems = () => {
     ]
 
     const [selectedItemCategory, setSelectedItemCategory] = useState(itemCategories[0]);
+    const [showSuccessMessage, setShowSuccessMessage] = useState(false);
 
     const handleChangeSelectedValue = (event) => {
         console.log(event.target.value);
@@ -49,8 +51,7 @@ const EditInventoryItems = () => {
             item_name, category, unitOfMearsurement, quantity, productDescription, manufactureDate, expireDate, price, imageUrl, reorderLevel
         }
 
-        //console.log(itemObj)
-        //update item data
+        // Update item data
         fetch(`http://localhost:5000/inventoryitem/${id}`, {
             method: "PATCH",
             headers: {
@@ -58,9 +59,12 @@ const EditInventoryItems = () => {
             },
             body: JSON.stringify(updateItemObj)
         }).then(res => res.json()).then(data => {
-            //console.log(data)
-            alert("Item Updated Successfully!")
-        })
+            // Show success message
+            setShowSuccessMessage(true);
+            setTimeout(() => {
+                setShowSuccessMessage(false);
+            }, 5000); // Hide the message after 5 seconds
+        });
 
     }
 
@@ -90,6 +94,7 @@ const EditInventoryItems = () => {
                                 itemCategories.map((option) => <option key={option} value={option}>{option}</option>)
                             }
                         </Select>
+
                     </div>
                 </div>
 
@@ -158,8 +163,6 @@ const EditInventoryItems = () => {
                     <TextInput id="imageUrl" name='imageUrl' type="text" placeholder="Item Image Url" required defaultValue={imageUrl} />
                 </div>
 
-
-
                 {/* Sixth Row - Product Description */}
                 <div>
                     <div className="mb-2 block">
@@ -174,8 +177,16 @@ const EditInventoryItems = () => {
                     </Link>
                     <Button type="submit" className='w-48 h-10 bg-green-500'>Update Item</Button>
                 </div>
-
             </form>
+
+            {/* Success Message */}
+            {showSuccessMessage && (
+                <div className="fixed top-4 left-1/2 transform -translate-x-1/2 bg-green-500 text-white py-2 px-4 rounded flex items-center">
+                    <PiCheckCircleBold className="h-6 w-6 mr-2" />
+                    <span>Item Updated Successfully!</span>
+                </div>
+            )}
+            
         </div>
     )
 }

@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 
 import { Button, Checkbox, Label, Select, TextInput, Textarea } from 'flowbite-react';
 import { Link } from 'react-router-dom';
+import { PiCheckCircleBold } from "react-icons/pi";
 
 const UploadInventoryItem = () => {
     const itemCategories = [
@@ -19,6 +20,7 @@ const UploadInventoryItem = () => {
     ]
 
     const [selectedItemCategory, setSelectedItemCategory] = useState(itemCategories[0]);
+    const [showSuccessMessage, setShowSuccessMessage] = useState(false);
 
     const handleChangeSelectedValue = (event) => {
         console.log(event.target.value);
@@ -26,7 +28,7 @@ const UploadInventoryItem = () => {
     }
 
     //handle item submission
-    const handleItemSubmit = (event) => {
+    const handleItemSubmit = async (event) => {
         event.preventDefault();
         const form = event.target;
 
@@ -48,18 +50,27 @@ const UploadInventoryItem = () => {
 
         console.log(itemObj)
 
-        //send data to database
-        fetch("http://localhost:5000/upload-inventoryitem", {
-            method: "POST",
-            headers: {
-                "Content-type": "application/json",
-            },
-            body: JSON.stringify(itemObj)
-        }).then(res => res.json()).then(data => {
-            //console.log(data)
-            alert("Item Uploaded Successfully!")
-            form.reset();
-        })
+        try {
+            const response = await fetch("http://localhost:5000/upload-inventoryitem", {
+                method: "POST",
+                headers: {
+                    "Content-type": "application/json",
+                },
+                body: JSON.stringify(itemObj)
+            });
+
+            if (response.ok) {
+                setShowSuccessMessage(true);
+                form.reset();
+                setTimeout(() => {
+                    setShowSuccessMessage(false);
+                }, 10000);
+            } else {
+                console.error('Failed to upload item');
+            }
+        } catch (error) {
+            console.error('Failed to upload item:', error);
+        }
 
     }
 
@@ -152,12 +163,13 @@ const UploadInventoryItem = () => {
                     </div>
                 </div>
 
-                {/*Fifth Row - Image URL*/}
+                {/*Fifth Row - Price*/}
                 <div >
                     <div className="mb-2 block">
                         <Label htmlFor="imageUrl" value="Item Image URL" />
                     </div>
                     <TextInput id="imageUrl" name='imageUrl' type="text" placeholder="Item Image Url" required />
+
                 </div>
 
                 {/* Sixth Row - Product Description */}
@@ -175,6 +187,15 @@ const UploadInventoryItem = () => {
                     <Button type="submit" className='w-48 h-10 bg-green-500'>Upload Item</Button>
                 </div>
             </form>
+
+            {/* Success Message */}
+            {showSuccessMessage && (
+                <div className="fixed top-4 left-1/2 transform -translate-x-1/2 bg-green-500 text-white py-2 px-4 rounded flex items-center">
+                    <PiCheckCircleBold className="h-6 w-6 mr-2" />
+                    <span>Item Uploaded Successfully!</span>
+                </div>
+            )}
+            
         </div>
     )
 }
