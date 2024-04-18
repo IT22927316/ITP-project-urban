@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Table } from 'flowbite-react';
 import { Link } from 'react-router-dom';
+import { Button } from 'flowbite-react';
+import jsPDF from 'jspdf';
+import 'jspdf-autotable';
+import userImg1 from "../assets/urbanlogo.jpeg";
 
 const ManageCommunity = () => {
   const [allCommunityforms, setAllCommunityforms] = useState([]);
@@ -19,6 +23,79 @@ const ManageCommunity = () => {
         // Handle error, e.g., display an error message to the user
       });
   }, []);
+
+  const generatePDF = () => {
+    console.log("Generating PDF...");
+    // Create a new PDF instance
+    const doc = new jsPDF();
+
+     // Add logo
+     const img = new Image();
+     img.src = userImg1;
+     img.onload = function () {
+       doc.addImage(this, 'JPEG', 10, 10, 20, 20); // Adjust position and size as needed
+  
+    // Set initial y position for content
+    let yPos = 20;
+  
+     // Add company name
+     doc.setFontSize(16);
+     doc.text('UrbanHarvestHub', 35, 20);
+
+    // Add header
+    doc.setFontSize(20);
+    doc.setTextColor(0, 102, 0); // Dark green
+       // Calculate the width of the text
+       const textWidth = doc.getStringUnitWidth('Community List') * doc.internal.getFontSize() / doc.internal.scaleFactor;
+       // Calculate the x-position to center the text
+       const centerX = (doc.internal.pageSize.width - textWidth) / 2;
+       // Add title (centered horizontally)
+       doc.text('Community List', centerX, 40);
+ 
+    doc.setTextColor(0); // Reset text color
+    doc.setFontSize(12);
+    const today = new Date().toLocaleDateString();
+    doc.text(`Date: ${today}`, 150, 20);
+  
+    
+  // Add a table to the PDF
+  //yPos += 10; // Increment y position for table headers
+  doc.autoTable({
+   // startY: yPos,
+    head: [['No','Community Name', 'Vision', 'Location', 'Category', 'Date', 'Author']],
+    body: allCommunityforms.map((community,index) => [
+      index + 1,
+      community.community_name,
+      community.community_vision,
+      community.location,
+      community.community_type,
+      new Date(community.date_added).toLocaleString(),
+      community.added_by
+    ]),
+    startY: 50, // Adjust starting Y position as needed
+    headStyles: {
+      fillColor: [47, 133, 90], // Green color for the head row
+      textColor: [255, 255, 255] // White text color for the head row
+    },
+    alternateRowStyles: {
+      fillColor: [223, 240, 216], // Light green color for alternate rows
+      textColor: [0, 0, 0] // Black text color for alternate rows
+    }
+  });
+  
+    // Add footer
+    const footerText = 'Signature Of the Community Manager';
+    const footerHeight = 20;
+    const pageHeight = doc.internal.pageSize.height;
+    doc.setTextColor(0); // Black color
+    doc.text('____________________________', 100, pageHeight - footerHeight-10); // Adjust position
+    doc.text(footerText, 100, pageHeight - footerHeight); // Adjust position
+ 
+    // Save the PDF
+    doc.save('community-list.pdf');
+};
+  };
+ 
 
   const handleDelete = (id) => {
     fetch(`http://localhost:5000/communityform/${id}`, {
@@ -42,7 +119,11 @@ const ManageCommunity = () => {
 
   return (
     <div className='px-4 my-12'>
-      <h2 className='mb-8 text-3xl font-bold'>Manage Your Communities</h2>
+      <h2 className='mb-8 text-3xl font-bold'>Manage Your Communities <span className='flex justify-end items-center space-x-4 px-4 lg:px-1'>
+      <Button onClick={generatePDF} type="submit" className='w-48 h-10 bg-green-500  '>Generate Report</Button>
+      </span>
+       </h2>
+     
       <Table className='lg:w-[1180px] '>
         <Table.Head>
           <Table.HeadCell>Number</Table.HeadCell>
@@ -61,15 +142,16 @@ const ManageCommunity = () => {
               <Table.Cell>{communityform.location}</Table.Cell>
               <Table.Cell>{communityform.community_type}</Table.Cell>
               <Table.Cell>
-                <Link className="font-medium text-cyan-600 hover:underline dark:text-cyan-500 mr-5" to={`/admin/dashboard/edit-communities/${communityform._id}`}>
+                <Link className=" bg-yellow-300 px-4 py-1 font-medium text-cyan-600 hover:underline dark:text-cyan-500 mr-5" to={`/admin/dashboard/edit-communities/${communityform._id}`}>
                   Edit
                 </Link>
-                <button onClick={() => handleDelete(communityform._id)} className='bg-red-600 px-4 py-1 font-semibold text-white rounded-sm hover:bg-sky-600'>Delete</button>
+                <button onClick={() => handleDelete(communityform._id)} className='bg-red-600 px-4 py-1 font-semibold text-white hover:bg-sky-600'>Delete</button>
               </Table.Cell>
             </Table.Row>
           </Table.Body>
         ))}
       </Table>
+      <br></br>
     </div>
   );
 };

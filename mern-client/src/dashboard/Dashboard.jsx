@@ -231,7 +231,7 @@ const Dashboard = () => {
             <p className="font-normal text-gray-700 dark:text-gray-400 mb-4">
               Upload Your Community Details Here!
             </p>
-            <Link to="/admin/dashboard/upload-articles">
+            <Link to="/admin/dashboard/upload-community">
               <button className='bg-blue-700 px-6 py-2 text-white font-medium hover:bg-black transition-all ease-in duration-200 rounded'>
                 Upload
               </button>
@@ -256,7 +256,7 @@ const Dashboard = () => {
             <p className="font-normal text-gray-700 dark:text-gray-400 mb-4">
               Manage Your Community Details Here!
             </p>
-            <Link to="/admin/dashboard/manage-articles">
+            <Link to="/admin/dashboard/manage-community">
               <button className='bg-blue-700 px-6 py-2 text-white font-medium hover:bg-black transition-all ease-in duration-200 rounded'>
                 Manage
               </button>
