@@ -90,12 +90,48 @@ const EditInventoryItems = () => {
                                 itemCategories.map((option) => <option key={option} value={option}>{option}</option>)
                             }
                         </Select>
-
                     </div>
-                    
                 </div>
 
-                {/* 3rd Row */}
+                {/* Second Row */}
+                <div className='flex gap-8'>
+                    {/*unitOfMearsurement*/}
+                    <div className='lg:w-1/2'>
+                        <div className="mb-2 block">
+                            <Label htmlFor="unitOfMearsurement" value="Unit Of Mearsurement" />
+                        </div>
+                        <TextInput id="unitOfMearsurement" name='unitOfMearsurement' type="text" placeholder="Unit Of Mearsurement" required defaultValue={unitOfMearsurement} />
+                    </div>
+
+                    {/*price*/}
+                    <div className='lg:w-1/2'>
+                        <div className="mb-2 block">
+                            <Label htmlFor="price" value="Price" />
+                        </div>
+                        <TextInput id="price" name='price' type="Number" step="0.01" placeholder="Price" required defaultValue={price} />
+                    </div>
+                </div>
+
+                {/* Third Row */}
+                <div className='flex gap-8'>
+                    {/*quantity*/}
+                    <div className='lg:w-1/2'>
+                        <div className="mb-2 block">
+                            <Label htmlFor="quantity" value="Quantity" />
+                        </div>
+                        <TextInput id="quantity" name='quantity' type="Number" placeholder="Quantity" required defaultValue={quantity} />
+                    </div>
+
+                    {/* reorderLevel */}
+                    <div className='lg:w-1/2'>
+                        <div className="mb-2 block">
+                            <Label htmlFor="reorderLevel" value="Reorder Level" />
+                        </div>
+                        <TextInput id="reorderLevel" name='reorderLevel' type="number" placeholder="Reorder Level" required defaultValue={reorderLevel} />
+                    </div>
+                </div>
+
+                {/* Fourth Row */}
                 <div className='flex gap-8'>
                     {/* manufactureDate */}
                     <div className='lg:w-1/2'>
@@ -114,51 +150,17 @@ const EditInventoryItems = () => {
                     </div>
                 </div>
 
-                {/*4rd Row - Price*/}
-                <div className='flex gap-8'>
-                    <div className='lg:w-1/2'>
-                        <div className="mb-2 block">
-                            <Label htmlFor="price" value="Price" />
-                        </div>
-                        <TextInput id="price" name='price' type="Number" step="0.01" placeholder="Price" required defaultValue={price} />
-
+                {/*Fifth Row - Image URL*/}
+                <div>
+                    <div className="mb-2 block">
+                        <Label htmlFor="imageUrl" value="Item Image URL" />
                     </div>
-
-                    <div className='lg:w-1/2'>
-                        <div className="mb-2 block">
-                            <Label htmlFor="imageUrl" value="Item Image URL" />
-                        </div>
-                        <TextInput id="imageUrl" name='imageUrl' type="text" placeholder="Item Image Url" required defaultValue={imageUrl} />
-                    </div>
+                    <TextInput id="imageUrl" name='imageUrl' type="text" placeholder="Item Image Url" required defaultValue={imageUrl} />
                 </div>
 
-                {/* Second Row */}
-                <div className='flex gap-8'>
-                    {/*unitOfMearsurement*/}
-                    <div className='lg:w-1/2'>
-                        <div className="mb-2 block">
-                            <Label htmlFor="unitOfMearsurement" value="Unit Of Mearsurement" />
-                        </div>
-                        <TextInput id="unitOfMearsurement" name='unitOfMearsurement' type="text" placeholder="Unit Of Mearsurement" required defaultValue={unitOfMearsurement} />
-                    </div>
 
-                    {/*quantity*/}
-                    <div className='lg:w-1/2'>
-                        <div className="mb-2 block">
-                            <Label htmlFor="quantity" value="Quantity" />
-                        </div>
-                        <TextInput id="quantity" name='quantity' type="Number" placeholder="Quantity" required defaultValue={quantity} />
-                    </div>
-                    {/* reorderLevel */}
-                    <div className='lg:w-1/2'>
-                        <div className="mb-2 block">
-                            <Label htmlFor="reorderLevel" value="Reorder Level" />
-                        </div>
-                        <TextInput id="reorderLevel" name='reorderLevel' type="number" placeholder="Reorder Level" required defaultValue={reorderLevel}/>
-                    </div>
-                </div>
 
-                {/* 5rd Row - Product Description */}
+                {/* Sixth Row - Product Description */}
                 <div>
                     <div className="mb-2 block">
                         <Label htmlFor="productDescription" value="Product Description" />
