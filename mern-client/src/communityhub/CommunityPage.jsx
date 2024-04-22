@@ -124,7 +124,7 @@ const CommunityPage = () => {
 
                 {/* article 01 */}
                 <div className="max-w-sm w-full lg:max-w-full lg:flex  shadow-lg transition-all duration-700 hover:scale-110">
-                    <div className="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden" style={{backgroundImage: "url('src/assets/banner-communities/img1.jpg')"}} title="Woman holding a mug">
+                    <div className="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden" style={{backgroundImage: "url('src/assets/banner-communities/img1.jpg')"}} title="Revolution">
                     </div>
                     <div className="border-r border-b border-l border-gray-400 lg:border-l-0 lg:border-t lg:border-gray-400 bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
                         <div className="mb-8">
@@ -137,24 +137,35 @@ const CommunityPage = () => {
                             <img className="w-10 h-10 rounded-full mr-4" src="/src/assets/banner-communities/p4.jpg" alt="Avatar of Jonathan Reinink"/>
                             <div className="text-sm">
                                 <p className="text-gray-900 leading-none">Rebecca Stevenson</p>
-                                <p className="text-gray-600">September 12, 2022</p>
+                                <p className="text-gray-600">August 12, 2023</p>
                             </div>
                         </div>
                     </div>
                 </div>
                
+               <br></br>
                {/* article 02 */}
                 <div className="max-w-sm w-full lg:max-w-full lg:flex  transition-all duration-700 hover:scale-110">
+                <div className="border-r border-b border-l border-gray-400 lg:border-l-400 lg:border-t lg:border-gray-400 rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
                 <div className='hover:font-semibold hover:text-black-700 '>
                     <h2 className='text-3xl text-black-700 font-bold my-5 md:w-4/5 leading-snug'>How AI is Transforming Agriculture<br></br></h2>
                     <p className='text-base text-black-500 italic hover:font-semibold'>Artificial Intelligence (AI) is revolutionizing every aspect of our lives,
                         and agriculture is no exception. From predictive analytics to autonomous farming equipment, AI technologies are empowering farmers
                         to make data-driven decisions and optimize every stage of the farming process . . .</p>
-                    <p className='mb-10 text-sm text-gray-500 '> September 25, 2022</p>
-                </div>
+                        
+                    <div className="flex items-center">
+                            <img className="w-10 h-10 rounded-full mr-4" src="/src/assets/banner-communities/p6.jpg" alt="Avatar of Jonathan Reinink"/>
+                            <div className="text-sm">
+                                <p className="text-gray-900 leading-none">Kim Park Jin</p>
+                                <p className="text-gray-600">March 05, 2023</p>
+                            </div>
+                        </div>               
+                        
+                     </div>
+                     </div>
                 </div>
 
-
+                <br></br>
               {/* article 03 */}
                 <div className="max-w-sm w-full lg:max-w-full lg:flex  shadow-lg transition-all duration-700 hover:scale-110">
                     <div className="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden" style={{backgroundImage: "url('src/assets/banner-communities/img3.jpg')"}} title="Woman holding a mug">
@@ -170,20 +181,34 @@ const CommunityPage = () => {
                             <img className="w-10 h-10 rounded-full mr-4" src="/src/assets/banner-communities/p1.jpg" alt="Avatar of Jonathan Reinink"/>
                             <div className="text-sm">
                                 <p className="text-gray-900 leading-none">Jonathan Reinink</p>
-                                <p className="text-gray-600">October 05, 2022</p>
+                                <p className="text-gray-600">October 15, 2022</p>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div className='hover:font-semibold hover:text-green-700 '>
+
+              <br></br>
+            {/* article 04 */}
+            <div className="max-w-sm w-full lg:max-w-full lg:flex  transition-all duration-700 hover:scale-110">
+            <div className="border-r border-b border-l border-gray-400 lg:border-l-400 lg:border-t lg:border-gray-400 rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
+                <div className='hover:font-semibold hover:text-black-700 '>
                     <h2 className='text-3xl text-black-700 font-bold my-5 md:w-4/5 leading-snug'>Planting Seeds of Success<br></br></h2>
                     <p className='text-base text-black-500 italic '>Selecting the right location is the most important part. After that the first step in starting your
                         garden is choosing the perfect spot. Look for an area in your yard or balcony that receives ample sunlight and has good drainage Consider factors such as
                         proximity to water sources and protection from strong winds. If space is limited . . .</p>
-                    <p className='mb-10 text-sm text-gray-500 '> January 8, 2023</p>
+                    <br></br>
+                    <div className="flex items-center">
+                            <img className="w-10 h-10 rounded-full mr-4" src="/src/assets/banner-communities/p5.jpg" alt="Avatar of Jonathan Reinink"/>
+                            <div className="text-sm">
+                                <p className="text-gray-900 leading-none">Emily Timberlake</p>
+                                <p className="text-gray-600">September 13, 2022</p>
+                            </div>
+                        </div>
                 </div>
             </div>
+            </div>
+        </div>
         </div>
     )
 };
