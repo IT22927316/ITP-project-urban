@@ -70,13 +70,14 @@ const ShopPage = () => {
             </div>
             
             <Link to={`/inventoryitem/${inventoryItem._id}`}>
-              <h5 className="text-xl font-bold tracking-tight text-gray-900 dark:text-white">
+              <h5 className="text-xl font-bold tracking-tight text-gray-900 mb-2">
+
                 {inventoryItem.item_name}
               </h5>
             
-              <p className="font-normal text-gray-700 dark:text-gray-400">
-                <p><strong>Category: </strong>{inventoryItem.category}</p>
-                <p><strong>Price: </strong>LKR {inventoryItem.price}</p>
+              <p className="text-sm text-gray-500 font-semibold">
+                <p><strong>Category : </strong>{inventoryItem.category}</p>
+                <p><strong>Price : </strong>LKR {inventoryItem.price}</p>
               </p>
             </Link>
           </Card>
