@@ -29,12 +29,12 @@ const MyCart = () => {
 
   return (
     <div className="mt-8 px-4 lg:px-24">
-      <br /><br />
-      <h2 className="text-3xl font-bold text-center mb-8">Your Cart</h2>
+      <br /><br /><br />
+      <h2 className="text-4xl font-bold text-center mb-8">Your Cart</h2>
 
       <table className="table-fixed w-full mb-8">
         <thead>
-          <tr className="bg-gray-100">
+          <tr className="bg-green-300">
             <th className="w-1/6 py-2 text-center">Image</th>
             <th className="w-2/6 py-2 text-center">Item</th>
             <th className="w-1/6 py-2 text-center">Price</th>
