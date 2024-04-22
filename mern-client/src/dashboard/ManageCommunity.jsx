@@ -2,12 +2,16 @@ import React, { useEffect, useState } from 'react';
 import { Table } from 'flowbite-react';
 import { Link } from 'react-router-dom';
 import { Button } from 'flowbite-react';
+import { FaSearch } from "react-icons/fa";
+import { PiCheckCircleBold } from "react-icons/pi";
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 import userImg1 from "../assets/urbanlogo.jpeg";
 
 const ManageCommunity = () => {
   const [allCommunityforms, setAllCommunityforms] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [showDeleteSuccessMessage, setShowDeleteSuccessMessage] = useState(false);
 
   useEffect(() => {
     fetch("http://localhost:5000/all-communityforms")
@@ -22,7 +26,8 @@ const ManageCommunity = () => {
         console.error('Error fetching data:', error);
         // Handle error, e.g., display an error message to the user
       });
-  }, []);
+  }, [showDeleteSuccessMessage]); // Add showDeleteSuccessMessage to the dependency array
+
 
   const generatePDF = () => {
     console.log("Generating PDF...");
@@ -108,8 +113,10 @@ const ManageCommunity = () => {
         return res.json();
       })
       .then(data => {
-        alert("Community Deleted Successfully!");
-        // You may want to update the state here if needed
+        setShowDeleteSuccessMessage(true);
+        setTimeout(() => {
+          setShowDeleteSuccessMessage(false);
+        }, 5000); // Hide the message after 5 seconds
       })
       .catch(error => {
         console.error('Error deleting community:', error);
@@ -117,13 +124,40 @@ const ManageCommunity = () => {
       });
   };
 
+   // Filter communities based on search query
+   const filteredCommunityForms = allCommunityforms.filter(communityform => 
+    communityform.community_name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    communityform.community_type.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    communityform.location.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   return (
     <div className='px-4 my-12'>
-      <h2 className='mb-8 text-3xl font-bold'>Manage Your Communities <span className='flex justify-end items-center space-x-4 px-4 lg:px-1'>
+      <div className='flex justify-between items-start mb-8'>
+      <h2 className='mb-8 text-3xl font-bold'>Manage Your Communities</h2>
+
+        {/* Search bar */}
+        <div className="relative w-96 mb-4">
+          <input
+            type="text"
+            placeholder="Search Commmunity, Category or Location"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className='h-10 pl-10 pr-10 text-sm rounded-full shadow-sm w-full border border-gray-300'
+          />
+          <div className="absolute top-0 left-0 mt-2.5 ml-4 text-gray-500">
+            <FaSearch size="20px" />
+          </div>
+        </div>
+      </div>
+
+       {/* Report Genarating Button */}
+       <div className='flex justify-end items-center space-x-4 px-4 lg:px-1'>
       <Button onClick={generatePDF} type="submit" className='w-48 h-10 bg-green-500  '>Generate Report</Button>
-      </span>
-       </h2>
-     
+      </div>
+      <br />
+
+      {/* Table */}  
       <Table className='lg:w-[1180px] '>
         <Table.Head>
           <Table.HeadCell>Number</Table.HeadCell>
@@ -133,7 +167,7 @@ const ManageCommunity = () => {
           <Table.HeadCell>Category</Table.HeadCell>
           <Table.HeadCell><span>Edit Or Delete</span></Table.HeadCell>
         </Table.Head>
-        {allCommunityforms.map((communityform, index) => (
+        {filteredCommunityForms.map((communityform, index) => (
           <Table.Body className="divide-y" key={communityform._id}>
             <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
               <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">{index + 1}</Table.Cell>
@@ -151,7 +185,15 @@ const ManageCommunity = () => {
           </Table.Body>
         ))}
       </Table>
-      <br></br>
+
+      {/* Delete Success Message */}
+      {showDeleteSuccessMessage && (
+        <div className="fixed top-4 left-1/2 transform -translate-x-1/2 bg-green-500 text-white py-2 px-4 rounded flex items-center">
+          <PiCheckCircleBold className="h-6 w-6 mr-2" />
+          <span>Community Deleted Successfully!</span>
+        </div>
+      )}
+
     </div>
   );
 };
