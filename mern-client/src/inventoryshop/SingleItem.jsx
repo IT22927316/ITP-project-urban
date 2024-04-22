@@ -39,7 +39,8 @@ const SingleItem = () => {
         </div>
 
         <div className='md:w-1/2 space-y-6'>
-          <h2 className='text-4xl font-bold my-5 md:w-4/5 leading-snug'>{item_name}</h2>
+          <h2 className='text-4xl text-green-700 font-bold my-5 md:w-4/5 leading-snug'>{item_name}</h2>
+          <hr></hr>
 
           <p className='mb-10 text-lg md:w-5/6'><strong>Category: </strong>{category}</p>
           <hr></hr>
@@ -69,6 +70,7 @@ const SingleItem = () => {
 
           {/* Link to shop page */}
           <a href="/shop" className='mt-8 block'><button className='bg-green-700 text-white font-semibold px-5 py-2 rounded hover:bg-black transition-all duration-300'>Back</button></a>
+          <br/>
         </div>
       </div>
     </div>
