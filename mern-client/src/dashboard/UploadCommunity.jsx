@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
-
+import { PiCheckCircleBold } from "react-icons/pi";
 import { Button, Label, Select, TextInput, Textarea } from 'flowbite-react';
+import { Link } from 'react-router-dom';
 
 const UploadCommunity = () => {
   const communityCategories = [
@@ -18,6 +19,7 @@ const UploadCommunity = () => {
   ]
 
   const [selectedCommunityCategory, setSelectedCommunityCategory] = useState(communityCategories[0]);
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
 
   const handleChangeSelectedValue = (event) => {
       console.log(event.target.value);
@@ -25,7 +27,7 @@ const UploadCommunity = () => {
   }
 
   //handle community submission
-  const handleCommunitySubmit = (event) => {
+  const handleCommunitySubmit = async (event) => {
       event.preventDefault();
       const form = event.target;
 
@@ -43,19 +45,29 @@ const UploadCommunity = () => {
       console.log(communityObj)
 
       //send data to database
-      fetch("http://localhost:5000/upload-communityform", {
+      try {
+      const response = await fetch("http://localhost:5000/upload-communityform", {
         method: "POST",
         headers: {
           "Content-type": "application/json",
         },
         body: JSON.stringify(communityObj)
-      }).then(res => res.json()).then(data => {
-        //console.log(data)
-        alert("Community Uploaded Successfully!")
-        form.reset();
-      })
+      });
 
+      if (response.ok) {
+        setShowSuccessMessage(true);
+        form.reset();
+        setTimeout(() => {
+            setShowSuccessMessage(false);
+        }, 10000);
+    } else {
+        console.error('Failed to upload item');
+    }
+  } catch (error) {
+    console.error('Failed to upload item:', error);
   }
+
+}
 
   return (
     <div className='px-4 my-12'>
@@ -120,9 +132,23 @@ const UploadCommunity = () => {
         <Textarea id="description" name='description' placeholder="Community Description" required  className='w-full' rows={10} />
       </div>
 
-      <Button type="submit" className='mt-5'>Create Community</Button>
+      <div className='flex justify-end items-center space-x-4 px-4 lg:px-1'>
+            <Link to="/admin/dashboard/manage-community">
+                <Button className='w-48 h-10 bg-red-500'>Cancel</Button>
+            </Link>
+            <Button type="submit" className='w-48 h-10 bg-green-700'>Create Community</Button>
+        </div>
 
     </form>
+
+    {/* Success Message */}
+    {showSuccessMessage && (
+                <div className="fixed top-4 left-1/2 transform -translate-x-1/2 bg-green-500 text-white py-2 px-4 rounded flex items-center">
+                    <PiCheckCircleBold className="h-6 w-6 mr-2" />
+                    <span>Community Added Successfully!</span>
+                </div>
+            )}
+
     </div>
   )
 }

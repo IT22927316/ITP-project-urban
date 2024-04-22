@@ -40,6 +40,12 @@ export const SideBar = () => {
           <Sidebar.Item href="/admin/dashboard/manage-event" icon={HiInbox}>
             Manage Events
           </Sidebar.Item>
+          <Sidebar.Item href="/admin/dashboard/manage-community" icon={HiInbox}>
+            Manage Community
+          </Sidebar.Item>
+          <Sidebar.Item href="/admin/dashboard/upload-community" icon={HiOutlineCloudUpload}>
+            Upload Community
+          </Sidebar.Item>
           <Sidebar.Item href="/admin/dashboard/manage-inventoryitems" icon={HiShoppingBag}>
             Manage Products
           </Sidebar.Item>

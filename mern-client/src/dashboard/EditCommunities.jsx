@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { Button, Checkbox, Label, Select, TextInput, Textarea } from 'flowbite-react';
 import { useLoaderData, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { PiCheckCircleBold } from "react-icons/pi";
 
 const EditCommunities = () => {
   const {id} = useParams();
@@ -21,6 +23,7 @@ const EditCommunities = () => {
   ]
 
   const [selectedCommunityCategory, setSelectedCommunityCategory] = useState(communityCategories[0]);
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
 
   const handleChangeSelectedValue = (event) => {
       console.log(event.target.value);
@@ -43,7 +46,7 @@ const EditCommunities = () => {
         community_name,community_vision, communityImage,community_type,location, description
       }
 
-      //console.log(communityObj)
+    
       //update community data
       fetch(`http://localhost:5000/communityform/${id}`,{
         method: "PATCH",
@@ -52,9 +55,12 @@ const EditCommunities = () => {
         },
         body: JSON.stringify(updateCommunityObj)
       }).then(res => res.json()).then(data => {
-        //console.log(data)
-        alert("Community Details Updated Successfully!")
-      })
+        // Show success message
+        setShowSuccessMessage(true);
+        setTimeout(() => {
+            setShowSuccessMessage(false);
+        }, 5000); // Hide the message after 5 seconds
+    });
 
   }
 
@@ -121,9 +127,21 @@ const EditCommunities = () => {
         <Textarea id="description" name='description' placeholder="Community Description" required  className='w-full' rows={10} defaultValue={description}/>
       </div>
 
-      <Button type="submit" className='mt-5'>Update Community Details</Button>
-
+      <div className='flex justify-end items-center space-x-4 px-4 lg:px-1'>
+            <Link to="/admin/dashboard/manage-community">
+                <Button className='w-48 h-10 bg-red-500'>Cancel</Button>
+            </Link>
+            <Button type="submit" className='w-48 h-10 bg-green-700'>Update Community</Button>
+        </div>
     </form>
+
+    {/* Success Message */}
+    {showSuccessMessage && (
+                <div className="fixed top-4 left-1/2 transform -translate-x-1/2 bg-green-500 text-white py-2 px-4 rounded flex items-center">
+                    <PiCheckCircleBold className="h-6 w-6 mr-2" />
+                    <span>Community Details Updated Successfully!</span>
+                </div>
+            )}
     </div>
   )
 }
