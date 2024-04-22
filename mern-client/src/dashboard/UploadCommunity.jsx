@@ -133,7 +133,7 @@ const UploadCommunity = () => {
       </div>
 
       <div className='flex justify-end items-center space-x-4 px-4 lg:px-1'>
-            <Link to="/communitymain">
+            <Link to="/admin/dashboard/manage-community">
                 <Button className='w-48 h-10 bg-red-500'>Cancel</Button>
             </Link>
             <Button type="submit" className='w-48 h-10 bg-green-700'>Create Community</Button>
