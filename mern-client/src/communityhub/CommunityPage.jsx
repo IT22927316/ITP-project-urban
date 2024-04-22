@@ -75,7 +75,10 @@ const CommunityPage = () => {
 
                 <p className='mb-10 text-base text-gray-500'>
                     Harvest Festival and Community Potluck<br></br><br></br>
-                    Workshop on Sustainable Farming Practices<br></br>
+                    Workshop on Sustainable Farming Practices<br></br><br></br>
+                    Crafting Connections-DIY Workshop Series<br></br><br></br>
+                    Blossoming Beauty: Floral Fiesta Get to gather<br></br><br></br>
+                    "Clean & Green"Community Clean-Up Day<br></br><br></br>
                 </p>
 
                 <Link to="/events">
