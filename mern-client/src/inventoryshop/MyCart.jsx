@@ -59,16 +59,11 @@ const MyCart = () => {
               <td className="py-4 text-center">LKR {parseFloat(item.price).toFixed(2)}</td>
               <td className="py-4 text-center">
                 <div className="flex justify-center items-center">
-                  <button className="text-white bg-red-500 hover:bg-red-600 px-3 py-2 rounded-l rounded-r" onClick={() => handleQuantityChange(item, item.quantity - 1)}>-</button>
+                  <button className="text-white bg-red-500 hover:bg-red-600 active:bg-red-700 px-3 py-2 rounded-l rounded-r" onClick={() => handleQuantityChange(item, item.quantity - 1)}>-</button>
                   <span className="px-3 py-2 bg-gray-200 rounded text-gray-700">{item.quantity}</span>
-                  <button className="text-white bg-green-500 hover:bg-green-600 px-3 py-2 rounded-l rounded-r" onClick={() => handleQuantityChange(item, item.quantity + 1)}>+</button>
+                  <button className="text-white bg-green-500 hover:bg-green-600 active:bg-green-700 px-3 py-2 rounded-l rounded-r" onClick={() => handleQuantityChange(item, item.quantity + 1)}>+</button>
                 </div>
               </td>
-
-
-
-
-
               <td className="py-4 text-center">LKR {(item.price * item.quantity).toFixed(2)}</td>
               <td className="py-4 text-center">
                 <button className="text-red-600 hover:text-red-700 font-semibold" onClick={() => dispatch({ type: 'REMOVE_FROM_CART', payload: item })}>
