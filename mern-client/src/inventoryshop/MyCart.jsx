@@ -8,7 +8,11 @@ const MyCart = () => {
   const [pickupMethod, setPickupMethod] = useState('');
 
   const handleQuantityChange = (item, newQuantity) => {
-    dispatch({ type: 'UPDATE_QUANTITY', payload: { id: item.id, quantity: parseInt(newQuantity) } });
+    const quantity = parseInt(newQuantity);
+    if (quantity < 1) {
+      quantity = 1; // Ensure minimum quantity is 1
+    }
+    dispatch({ type: 'UPDATE_QUANTITY', payload: { id: item.id, quantity } });
   };
 
   // Calculate total price by multiplying item price with its quantity for each item in the cart
@@ -54,14 +58,17 @@ const MyCart = () => {
               <td className="py-4 text-center">{item.item_name}</td>
               <td className="py-4 text-center">LKR {parseFloat(item.price).toFixed(2)}</td>
               <td className="py-4 text-center">
-                <input
-                  type="number"
-                  min="1"
-                  value={item.quantity}
-                  onChange={e => handleQuantityChange(item, e.target.value)}
-                  className="w-16 px-2 py-1 border border-gray-300 rounded text-center"
-                />
+                <div className="flex justify-center items-center">
+                  <button className="text-white bg-red-500 hover:bg-red-600 px-3 py-2 rounded-l rounded-r" onClick={() => handleQuantityChange(item, item.quantity - 1)}>-</button>
+                  <span className="px-3 py-2 bg-gray-200 rounded text-gray-700">{item.quantity}</span>
+                  <button className="text-white bg-green-500 hover:bg-green-600 px-3 py-2 rounded-l rounded-r" onClick={() => handleQuantityChange(item, item.quantity + 1)}>+</button>
+                </div>
               </td>
+
+
+
+
+
               <td className="py-4 text-center">LKR {(item.price * item.quantity).toFixed(2)}</td>
               <td className="py-4 text-center">
                 <button className="text-red-600 hover:text-red-700 font-semibold" onClick={() => dispatch({ type: 'REMOVE_FROM_CART', payload: item })}>

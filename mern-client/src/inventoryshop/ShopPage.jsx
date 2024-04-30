@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import { useCart } from '../inventoryshop/CartContext';
 import { FaCartPlus } from 'react-icons/fa6'; // Importing the cart icon
 import { FaSearch } from "react-icons/fa";
+import { LiaCartPlusSolid } from "react-icons/lia";
+import { BiCartAdd } from "react-icons/bi";
 
 const ShopPage = () => {
   const { state, dispatch } = useCart();
@@ -65,7 +67,7 @@ const ShopPage = () => {
               {/* Add to Cart button positioned in the top right corner of the image, at the bottom */}
               <button className='absolute bottom-1 right-1 bg-green-500 text-white font-semibold w-12 h-12 rounded-full shadow-md hover:bg-green-400 hover:shadow-lg transition-all duration-300 flex items-center justify-center' 
                 onClick={() => handleAddToCart(inventoryItem)}>
-                <FaCartPlus style={{ fontSize: '1.8rem', color: '#f1faf6' }} />
+                <BiCartAdd style={{ fontSize: '2rem', color: '#f1faf6' }} />
               </button>
             </div>
             

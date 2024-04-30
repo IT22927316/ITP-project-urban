@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { FaUser, FaXmark } from "react-icons/fa6";
 import { PiShoppingCart } from "react-icons/pi";
 import { useCart } from '../inventoryshop/CartContext';
+import { BiCart } from "react-icons/bi";
 
 const Navbar = () => {
     const { state } = useCart();
@@ -62,7 +63,7 @@ const Navbar = () => {
                         </Link>
                         <Link to="/mycart">
                             <div className="relative">
-                                <PiShoppingCart className={`text-white hover:text-blue-700 ${cartIconSize}`} />
+                                <BiCart className={`text-white hover:text-blue-700 ${cartIconSize}`} />
                                 {cartItemCount > 0 && (
                                     <div className="absolute -top-2 -right-2 bg-red-500 rounded-full text-white text-xs w-5 h-5 flex items-center justify-center">{cartItemCount}</div>
                                 )}
