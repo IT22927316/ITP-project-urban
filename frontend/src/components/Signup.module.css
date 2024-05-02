@@ -1,0 +1,50 @@
+/* Signup.module.css */
+
+.signupContainer1 {
+  background: url('../assets/startupbg.png') no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+   
+  }
+
+.signupContainer {
+  background: rgba(255, 255, 255); /* White with 50% opacity */
+  border-radius: 10px; /* Rounded corners */
+  padding: 20px;
+  
+}
+
+
+.inputField {
+  background: rgba(183, 175, 175, 0.604);
+  display: block;
+  width: 100%;
+  padding: 10px;
+  width: 400px;
+  margin-bottom: 10px; /* Space between input fields */
+  border: none;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+.submitButton {
+  background-color: #4CAF50; /* Green background */
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  display: block;
+  width: 50%; /* Use max-width if you want to limit the button width */
+  font-size: 1rem;
+  margin-top: 20px; /* Space above the button */
+  margin-left: auto; /* Centering the button */
+  margin-right: auto; /* Centering the button */
+}
+
+.submitButton:hover {
+  background-color: #367c39;
+}

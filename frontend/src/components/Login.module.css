@@ -1,0 +1,46 @@
+/* Login.module.css */
+.loginContainer {
+  background: url('../assets/startupbg.png') no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+   
+}
+
+.loginContainer1 {
+  background: rgba(255, 255, 255); /* White with 50% opacity */
+  border-radius: 20px; /* Rounded corners */
+  padding: 20px;
+}
+
+
+.inputField {
+  
+  width: 100%;
+  margin-bottom: 1rem;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  background-color: rgba(255, 255, 255, 0.7);
+}
+
+.loginButton {
+  background-color: #4CAF50; /* Green background */
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  display: block;
+  width: 50%; /* Use max-width if you want to limit the button width */
+  font-size: 1rem;
+  margin-top: 20px; /* Space above the button */
+  margin-left: auto; /* Centering the button */
+  margin-right: auto; /* Centering the button */
+}
+
+.loginButton:hover {
+  background-color: #367c39;
+}
