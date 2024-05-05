@@ -60,6 +60,7 @@ import ManageInventoryItems from "../dashboard/ManageInventoryItems";
 import UploadInventoryItem from "../dashboard/UploadInventoryItem";
 import EditInventoryItems from "../dashboard/EditInventoryItems";
 import { CartProvider } from '../inventoryshop/CartContext';
+import ManageOrders from "../dashboard/ManageOrders";
 
 const router = createBrowserRouter([
     {
@@ -283,6 +284,10 @@ const router = createBrowserRouter([
                 path: "/admin/dashboard/edit-inventoryitems/:id",
                 element: <EditInventoryItems />,
                 loader: ({ params }) => fetch(`http://localhost:5000/inventoryitem/${params.id}`),
+            },
+            {
+                path: "/admin/dashboard/manage-orders",
+                element: <ManageOrders />,
             },
         ]
     },
