@@ -53,7 +53,7 @@ export const SideBar = () => {
             Upload Item
           </Sidebar.Item>
           <Sidebar.Item href="/admin/dashboard/upload-driver" icon={HiOutlineCloudUpload}>
-            Upload Driver
+            Upload Drivers
           </Sidebar.Item>
           <Sidebar.Item href="/admin/dashboard/manage-driverdetails" icon={HiInbox}>
             Manage Drivers
