@@ -102,9 +102,11 @@ const MyCart = () => {
                   Store Pickup
                 </button>
               </Link>
+              <Link to="/deliverydrivers">
               <button className={`bg-green-500 text-white font-semibold py-3 px-10 rounded-lg hover:bg-green-600 transition-all duration-300 ${pickupMethod === 'driver' ? 'bg-green-800' : ''}`} onClick={() => handlePickupMethod('driver')}>
                 Hire a Driver
               </button>
+              </Link>
 
             </div>
             <button onClick={handleCloseModal} className="absolute top-4 right-4 text-gray-700 hover:text-gray-900">
