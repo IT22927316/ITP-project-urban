@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 
 import { Button, Checkbox, Label, Select, TextInput, Textarea } from 'flowbite-react';
 import { Link } from 'react-router-dom';
+import { PiCheckCircleBold } from "react-icons/pi";
 
 const UploadDriver= () => {
   const Dgender = [
@@ -10,6 +11,7 @@ const UploadDriver= () => {
   ]
 
   const [selectedGender, setSelectedGender] = useState(Dgender[0]);
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
 
   const handleChangeSelectedValue = (event) => {
       console.log(event.target.value);
@@ -32,7 +34,7 @@ const UploadDriver= () => {
 
 
   //handle driver profile submission
-  const handleDriverFormSubmit = (event) => {
+  const handleDriverFormSubmit = async (event) => {
       event.preventDefault();
       const form = event.target;
 
@@ -56,17 +58,27 @@ const UploadDriver= () => {
       console.log(driverObj)
 
       //send data to database
-      fetch("http://localhost:5000/upload-driver", {
-        method: "POST",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify(driverObj)
-      }).then(res => res.json()).then(data => {
-        //console.log(data)
-        alert("Driver Profile Uploaded Successfully!")
-        form.reset();
-      })
+      try {
+        const response = await fetch("http://localhost:5000/upload-driver", {
+            method: "POST",
+            headers: {
+                "Content-type": "application/json",
+            },
+            body: JSON.stringify(driverObj)
+        });
+
+        if (response.ok) {
+            setShowSuccessMessage(true);
+            form.reset();
+            setTimeout(() => {
+                setShowSuccessMessage(false);
+            }, 10000);
+        } else {
+            console.error('Failed to upload driver profile');
+        }
+    } catch (error) {
+        console.error('Failed to upload driver profile:', error);
+    }
 
   }
 
@@ -185,8 +197,16 @@ const UploadDriver= () => {
                         </Link>
                         <Button type="submit" className='w-48 h-10 bg-green-500'>Upload Driver</Button>
                   </div>
-
         </form>
+
+        {/* Success Message */}
+        {showSuccessMessage && (
+            <div className="fixed top-4 left-1/2 transform -translate-x-1/2 bg-green-500 text-white py-2 px-4 rounded flex items-center">
+                <PiCheckCircleBold className="h-6 w-6 mr-2" />
+                <span>Driver Profile Uploaded Successfully!</span>
+            </div>
+        )}
+
     </div>
   )
 }
