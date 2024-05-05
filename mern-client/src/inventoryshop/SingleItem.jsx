@@ -68,14 +68,14 @@ const SingleItem = () => {
           <p className='mb-10 text-lg md:w-5/6'><strong>Expire Date: </strong>{expireDate}</p>
           <p className='mb-10 text-lg md:w-5/6'><strong>Price: </strong>LKR {price}</p>
 
-          <hr/>
+          <hr />
 
           <div className="flex gap-4">
             <button className='bg-green-700 text-white font-semibold px-6 py-3 rounded-md shadow-md hover:bg-green-800 hover:shadow-lg transition-all duration-300 w-full' onClick={handleBuyNow}>Buy Now</button>
             <button className='bg-green-200 text-green-600 font-semibold px-6 py-3 rounded-md shadow-md hover:bg-green-300 hover:shadow-lg transition-all duration-300 w-full' onClick={handleAddToCart}>{buttonText}</button>
           </div>
 
-          <br/>
+          <br />
         </div>
       </div>
 
