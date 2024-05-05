@@ -627,7 +627,7 @@ async function run() {
   //-------------------For Delivery driver-----------------------------------------------------------------------------------------
 
   //insert a delivery driver to the database using post method                                                               
-  app.post("/upload-driverdetail", async(req,res) => {
+  app.post("/upload-driver", async(req,res) => {
     const data = req.body;
     const result = await driverdetailCollections.insertOne(data);
     res.send(result);
