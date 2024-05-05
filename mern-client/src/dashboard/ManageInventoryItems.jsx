@@ -39,10 +39,10 @@ const ManageInventoryItems = () => {
       doc.text('UrbanHarvestHub', 35, 20);
 
       // Add current date
-    const currentDate = new Date().toLocaleDateString();
-    doc.setFontSize(12);
-    doc.setTextColor(0, 0, 0);
-    doc.text(`Date: ${currentDate}`, 160, 25); // Adjust position as needed
+      const currentDate = new Date().toLocaleDateString();
+      doc.setFontSize(12);
+      doc.setTextColor(0, 0, 0);
+      doc.text(`Date: ${currentDate}`, 160, 25); // Adjust position as needed
 
       // Add line separating logo, company name, and date from title
       doc.setLineWidth(0.5); // Set line width
