@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import deliverimage from "../assets/deliveryimage.jpeg";
+import deliverimage from "../assets/deliveryimage.jpg";
 
 const MainDriverPage = () => {
   const [availableDrivers, setAvailableDrivers] = useState([]);
