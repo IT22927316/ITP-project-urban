@@ -171,6 +171,7 @@ const ManageInventoryItems = () => {
           <Table.HeadCell>Price</Table.HeadCell>
           <Table.HeadCell><span>Edit Or Delete</span></Table.HeadCell>
         </Table.Head>
+        
         {filteredInventoryItems.map((inventoryItem, index) => (
           <Table.Body className="divide-y" key={inventoryItem._id}>
             <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">

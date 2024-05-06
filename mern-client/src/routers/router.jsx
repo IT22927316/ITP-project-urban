@@ -168,7 +168,7 @@ const router = createBrowserRouter([
             {
                 path: "/singledriver/:id",
                 element: <SingleDriverProfile />,
-                loader: ({ params }) => fetch(`http://localhost:5000/singledriver/${params.id}`)
+                loader: ({ params }) => fetch(`http://localhost:5000/driverdetail/${params.id}`)
             }
         ]
     },
@@ -248,11 +248,11 @@ const router = createBrowserRouter([
             },
             {
                 path: "/admin/dashboard/manage-deliverydrivers",
-                element: <ManageDrivers />
+                element: <ManageDrivers/>
             },
             {
                 path: "/admin/dashboard/upload-driver",
-                element: <UploadDriver />
+                element: <UploadDriver/>
             },
             {
                 path: "/admin/dashboard/edit-driverdetails/:id",

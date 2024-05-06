@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Button, Checkbox, Label, Select, TextInput, Textarea } from 'flowbite-react';
 import { useLoaderData, useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import { PiCheckCircleBold } from "react-icons/pi";
 
 const EditDriverDetails= () => {
   const {id} = useParams();
@@ -14,6 +15,7 @@ const EditDriverDetails= () => {
   ]
 
   const [selectedGender, setSelectedGender] = useState(Dgender[0]);
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
 
   const handleChangeSelectedValue = (event) => {
       console.log(event.target.value);
@@ -57,18 +59,21 @@ const EditDriverDetails= () => {
       imageURL, name, description, age, gender, contactNo, NIC, category, licenseNo, vehicleType, vehicleNo, deliveryFee
     }
 
-    //console.log(driverObj);
-
     // Send data to the database and update driver data
     fetch(`http://localhost:5000/driverdetail/${id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify(updatedriverObj)
-    }).then(res => res.json()).then(data => {
-      alert("Driver Profile Updated Successfully!");
-    });
+            method: "PATCH",
+            headers: {
+                "Content-type": "application/json"
+            },
+            body: JSON.stringify(updatedriverObj)
+        }).then(res => res.json()).then(data => {
+            // Show success message
+            setShowSuccessMessage(true);
+            setTimeout(() => {
+                setShowSuccessMessage(false);
+            }, 5000); // Hide the message after 5 seconds
+        });
+
 
 }
 
@@ -182,15 +187,22 @@ const EditDriverDetails= () => {
                     </div>
                 
                   <div className='flex justify-between items-center space-x-4 px-4 lg:px-1 mt-20'>
-                      <Link to="/admin/dashboard">
+                      <Link to="/admin/dashboard/manage-deliverydrivers">
                           <Button className='w-30 h-10 bg-red-500'>Cancel</Button>
                       </Link>
                       
                           <Button type="submit" className='w-48 h-10 bg-green-500'>Update Profile</Button>
                       
                   </div>
-
         </form>
+          {/* Success Message */}
+          {showSuccessMessage && (
+                <div className="fixed top-4 left-1/2 transform -translate-x-1/2 bg-green-500 text-white py-2 px-4 rounded flex items-center">
+                    <PiCheckCircleBold className="h-6 w-6 mr-2" />
+                    <span>Driver Profile Updated Successfully!</span>
+                </div>
+            )}
+
     </div>
   )
 }
