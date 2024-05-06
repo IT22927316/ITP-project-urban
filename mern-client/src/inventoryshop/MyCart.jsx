@@ -8,12 +8,13 @@ const MyCart = () => {
   const [pickupMethod, setPickupMethod] = useState('');
 
   const handleQuantityChange = (item, newQuantity) => {
-    const quantity = parseInt(newQuantity);
+    let quantity = parseInt(newQuantity);
     if (quantity < 1) {
       quantity = 1; // Ensure minimum quantity is 1
     }
     dispatch({ type: 'UPDATE_QUANTITY', payload: { id: item.id, quantity } });
   };
+  
 
   // Calculate total price by multiplying item price with its quantity for each item in the cart
   const totalPrice = state.items.reduce((acc, item) => acc + (item.price * item.quantity), 0);
