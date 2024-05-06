@@ -143,9 +143,9 @@ const UploadCommunity = () => {
 
     {/* Success Message */}
     {showSuccessMessage && (
-                <div className="fixed top-4 left-1/2 transform -translate-x-1/2 bg-green-500 text-white py-2 px-4 rounded flex items-center">
+                <div className="fixed top-4 left-1/2 transform -translate-x-1/2 bg-green-500 text-white py-2 px-4 rounded-lg flex items-center">
                     <PiCheckCircleBold className="h-6 w-6 mr-2" />
-                    <span>Community Added Successfully!</span>
+                    <span className="text-lg">Community Added Successfully!</span>
                 </div>
             )}
 
