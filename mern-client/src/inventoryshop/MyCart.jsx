@@ -8,12 +8,13 @@ const MyCart = () => {
   const [pickupMethod, setPickupMethod] = useState('');
 
   const handleQuantityChange = (item, newQuantity) => {
-    const quantity = parseInt(newQuantity);
+    let quantity = parseInt(newQuantity);
     if (quantity < 1) {
       quantity = 1; // Ensure minimum quantity is 1
     }
     dispatch({ type: 'UPDATE_QUANTITY', payload: { id: item.id, quantity } });
   };
+  
 
   // Calculate total price by multiplying item price with its quantity for each item in the cart
   const totalPrice = state.items.reduce((acc, item) => acc + (item.price * item.quantity), 0);
@@ -103,9 +104,9 @@ const MyCart = () => {
                 </button>
               </Link>
               <Link to="/deliverydrivers">
-              <button className={`bg-green-500 text-white font-semibold py-3 px-10 rounded-lg hover:bg-green-600 transition-all duration-300 ${pickupMethod === 'driver' ? 'bg-green-800' : ''}`} onClick={() => handlePickupMethod('driver')}>
-                Hire a Driver
-              </button>
+                <button className={`bg-green-500 text-white font-semibold py-3 px-10 rounded-lg hover:bg-green-600 transition-all duration-300 ${pickupMethod === 'driver' ? 'bg-green-800' : ''}`} onClick={() => handlePickupMethod('driver')}>
+                  Hire a Driver
+                </button>
               </Link>
 
             </div>

@@ -51,7 +51,7 @@ const EditInventoryItems = () => {
             item_name, category, unitOfMearsurement, quantity, productDescription, manufactureDate, expireDate, price, imageUrl, reorderLevel
         }
 
-        // Update item data
+        //Update item data
         fetch(`http://localhost:5000/inventoryitem/${id}`, {
             method: "PATCH",
             headers: {
