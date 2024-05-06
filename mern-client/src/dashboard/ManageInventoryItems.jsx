@@ -196,9 +196,9 @@ const ManageInventoryItems = () => {
       </Table>
       {/* Delete Success Message */}
       {showDeleteSuccessMessage && (
-        <div className="fixed top-4 left-1/2 transform -translate-x-1/2 bg-green-500 text-white py-2 px-4 rounded flex items-center">
+        <div className="fixed top-4 left-1/2 transform -translate-x-1/2 bg-green-500 text-white py-2 px-4 rounded-lg flex items-center">
           <PiCheckCircleBold className="h-6 w-6 mr-2" />
-          <span>Inventory Item Deleted Successfully!</span>
+          <span className="text-lg">Inventory Item Deleted Successfully!</span>
         </div>
       )}
     </div>
