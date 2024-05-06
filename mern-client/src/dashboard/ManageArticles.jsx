@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-
 import { Table } from 'flowbite-react';
+import { Button} from 'flowbite-react';
 import { Link } from 'react-router-dom';
 
 
@@ -24,7 +24,18 @@ const ManageArticles = () => {
 
   return (
     <div className='px-4 my-12'>
-      <h2 className='mb-8 text-3xl font-bold'>Manage Your Article</h2>  
+      <div className='flex justify-between items-start mb-8'>
+          <h2 className='text-3xl font-bold'>
+              Manage Articles
+          </h2>
+          <div className='flex flex-col items-end'>
+            <div className='flex mt-4'>
+              <Link to="/admin/dashboard/generate-report-article">
+                <Button className='items-center rounded-full w-40 h-10 bg-green-700'>Generate Report</Button>
+              </Link>
+            </div>
+          </div>
+        </div>
 
       {/* Table */}
       <Table className='lg:w-[1180px] '>
