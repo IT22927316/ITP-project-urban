@@ -3,6 +3,7 @@ import { Table } from 'flowbite-react';
 import { Button} from 'flowbite-react';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
+import userImg1 from "../assets/urbanlogo.jpeg";
 
 
 const GenerateArticle = () => {
@@ -16,10 +17,38 @@ const GenerateArticle = () => {
     console.log("Generating PDF...");
     // Create a new PDF instance
     const doc = new jsPDF();
+
+    // Add logo
+    const img = new Image();
+    img.src = userImg1;
+    img.onload = function () {
+    doc.addImage(this, 'JPEG', 10, 10, 20, 20); // Adjust position and size as needed
+
+      // Add company name
+      doc.setFontSize(16);
+      doc.text('UrbanHarvestHub', 35, 20);
+
+      // Add current date
+      const currentDate = new Date().toLocaleDateString();
+      doc.setFontSize(12);
+      doc.setTextColor(0, 0, 0);
+      doc.text(`Date: ${currentDate}`, 160, 25); // Adjust position as needed
+
+      // Add line separating logo, company name, and date from title
+      doc.setLineWidth(0.5); // Set line width
+      doc.setDrawColor(0); // Set line color (black)
+      doc.line(10, 30, doc.internal.pageSize.width - 10, 30); // Draw line
+
+      // Add title
+      doc.setFontSize(20);
+      doc.setTextColor(47, 133, 97); // Set text color (RGB)
+      // Calculate the width of the text
+      const textWidth = doc.getStringUnitWidth('Articles Report') * doc.internal.getFontSize() / doc.internal.scaleFactor;
+      // Calculate the x-position to center the text
+      const centerX = (doc.internal.pageSize.width - textWidth) / 2;
+      // Add title (centered horizontally)
+      doc.text('Article-List Report', centerX, 40);
   
-    // Add a title to the PDF
-    doc.text('UrbanHarvestHub', 10, 5);
-    doc.text('Article-List', 10, 10);
     
   
     // Add a table to the PDF
@@ -32,12 +61,27 @@ const GenerateArticle = () => {
         article.approvedAdmin,
         article.submitDate,
       ]),
+      startY: 50, // Adjust starting Y position as needed
+        headStyles: {
+          fillColor: [47, 133, 90], // Green color for the head row
+          textColor: [255, 255, 255] // White text color for the head row
+        },
+        alternateRowStyles: {
+          fillColor: [223, 240, 216], // Light green color for alternate rows
+          textColor: [0, 0, 0] // Black text color for alternate rows
+        }
     });
   
+    // Add signature areas
+    doc.setFontSize(12);
+    doc.setTextColor(0, 0, 0);
+    doc.text('Signature Of the Agriculture Expert : ...................................', 60, doc.autoTable.previous.finalY + 20);
+    doc.text('Signature Of the Owner : ...................................', 60, doc.autoTable.previous.finalY + 40);
+    
     // Save the PDF
     doc.save('article-list.pdf');
   };
-
+}
 
   return (
     <div className='px-4 my-12'>
