@@ -61,6 +61,7 @@ import UploadInventoryItem from "../dashboard/UploadInventoryItem";
 import EditInventoryItems from "../dashboard/EditInventoryItems";
 import { CartProvider } from '../inventoryshop/CartContext';
 import ManageOrders from "../dashboard/ManageOrders";
+import GenerateArticle from "../dashboard/GenerateArticle";
 
 const router = createBrowserRouter([
     {
@@ -289,6 +290,10 @@ const router = createBrowserRouter([
                 path: "/admin/dashboard/manage-orders",
                 element: <ManageOrders />,
             },
+            {
+                path: "/admin/dashboard/generate-report-article",
+                element: <GenerateArticle/>
+            }
         ]
     },
     {
