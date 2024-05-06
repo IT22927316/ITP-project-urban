@@ -42,7 +42,7 @@ const ManageArticles = () => {
 
 <div className='flex justify-between items-start mb-8'>
           <h2 className='text-3xl font-bold'>
-              Learn Gather Share
+              Manage Articles
           </h2>
           <div className='flex flex-col items-end'>
             {/* Search bar with rounded shape and icon */}
