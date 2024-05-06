@@ -87,7 +87,7 @@ const GenerateArticle = () => {
     <div className='px-4 my-12'>
       <div className='flex justify-between items-start mb-8'>
           <h2>
-              <p  className='text-3xl font-bold'>Print Article Report</p><br/>
+              <p  className='text-3xl font-bold'>Article Report Preveiw</p><br/>
           </h2>
           
           <div className='flex flex-col items-end'>
