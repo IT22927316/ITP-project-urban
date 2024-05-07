@@ -31,7 +31,7 @@ const SingleEvent = () => {
           <p className='mb-10 text-lg md:w-5/6'>Event Fee: {event_fee}</p>
           <p className='mb-10 text-lg md:w-5/6'></p>
 
-              <Link to="/events" className='mt-8 block'><button className='bg-green-700 text-white font-semibold px-5 py-2 rounded hover:bg-black transition-all duration-300'>Apply</button></Link>
+              <Link to="/events" className='mt-8 block'><button className='bg-green-700 text-white font-semibold px-5 py-2 rounded hover:bg-black transition-all duration-300'>Events</button></Link>
       </div>
     </div>
   )
