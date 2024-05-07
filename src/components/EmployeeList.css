@@ -1,0 +1,20 @@
+.report-table {
+    border-collapse: collapse;
+    border: none;
+  }
+  
+  .report-table th,
+  .report-table td {
+    padding: 8px;
+    border: none;
+  }
+  
+  .report-table tbody tr:nth-child(odd) {
+    background-color: none;
+
+  }
+  
+  .report-table tbody tr:hover {
+    background-color: #ddd;
+    
+  }
